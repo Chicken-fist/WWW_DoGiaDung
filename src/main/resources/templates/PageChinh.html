@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<link rel="stylesheet" th:href="@{/css/dashboard.css}">
+
+</head>
+<body>
+	<input id="usersId" type="hidden" th:value="${usersId}" />
+	<input id="gioHangId" type="hidden" th:value="${gioHangId}" />
+	<div id="wapper">
+		<nav>
+			<ul class="menu">
+				<li><a th:href="@{/bao}"><i><img src="../img/logo.jpg"
+							alt=""></i></a></li>
+				<li><p id="menu-css">Xin chào đến với trang đặt đồ gia dụng
+						IUH</p></li>
+			</ul>
+			<span>
+				<ul>
+					<li><a sec:authorize="hasAuthority('CUSTOMER')"
+						class="menu-cart"
+						th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
+							src="../img/icon/akar-icons_cart.svg">Giỏ hàng | </a></li>
+					<li>Hi <i sec:authentication="name" style="font-size: 20px"></i>!
+					</li>
+				</ul>
+			</span>
+		</nav>
+	</div>
+	
+	<div class="header-searchs-sort">
+		<div class="header-sort">
+			<div class="dropdown">
+				<button class="dropbtn">
+					<img src="../img/Sort.png" alt="">
+				</button>
+				<div class="dropdown-content">
+					<a href="#">A-Z</a> <a href="#">Z-A</a>
+				</div>
+			</div>
+		</div>
+		<form th:action="@{/timkiem}" method="get">
+         	<div class="header-search">
+ 					 <input class="header-search-input" type="text" name="ten" th:value="${ten}"  placeholder="Tìm kiếm" size="20"pattern="[A-Za-z]+" title="Three letter country code" >
+ 						 <button class="header-search-button" type="submit">Tìm kiếm</button>
+ 						</div>
+ 			 </form>
+	</div>
+	<ul class="products">
+		<li th:each="todoitem : ${dsSanPham}">
+			<div class="product-item">
+				<div class="product-top">
+					<a href="#" class="product-thumb"> <img
+					th:src="${todoitem.hinhAnh}" style="width: 251px;height: 350px"
+						alt="">
+					</a>
+				</div>
+
+				<div class="product-info">
+					<a href="#" class="product-name" th:text="${todoitem.tenSanPham}"
+						th:href="@{/chitietdatbao/{maBao}(maBao=${todoitem.id})}"></a>
+				</div>
+			</div>
+		</li>
+	</ul>
+
+	<div class="pagination p1">
+		<ul>
+			<a href="#"><li><</li></a>
+			<a class="is-active" href="#"><li>1</li></a>
+			<a href="#"><li>2</li></a>
+			<a href="#"><li>3</li></a>
+			<a href="#"><li>4</li></a>
+			<a href="#"><li>5</li></a>
+			<a href="#"><li>6</li></a>
+			<a href="#"><li>></li></a>
+		</ul>
+	</div>
+
+</body>
+</html>

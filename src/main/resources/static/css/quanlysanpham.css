@@ -1,0 +1,154 @@
+* {
+	margin: 0px auto;
+}
+
+body {
+	background-image: url(/img/pattern.png);
+}
+
+#wapper {
+	margin: 0 auto;
+	padding: 5px;
+	background: #EBFAFE;
+	box-sizing: border-box;
+	height: 90px;
+}
+
+nav {
+	width: 100%;
+	background: #EDDEED;
+}
+
+.menu li {
+	height: inherit;
+	list-style: none;
+	float: left;
+	line-height: 55px;
+	text-indent: 15px;
+	position: relative;
+}
+
+.menu li img {
+	width: inherit;
+	height: inherit;
+	max-width: 150px;
+	height: 55px;
+	padding: 0px;
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+li:hover>a {
+	color: red;
+}
+
+#sub {
+	display: none;
+	position: absolute;
+}
+
+nav span {
+	font-size: 20px;
+	font-weight: bold;
+	color: red;
+	float: right;
+	padding: 15px;
+	text-align: center;
+}
+
+nav li p {
+	text-align: center;
+	font-size: 20px;
+	font-family: 'Times New Roman', Times, serif;
+	padding-left: 290px;
+}
+
+nav span ul li {
+	list-style: none;
+	float: left;
+	margin-right: 20px;
+	text-indent: 15px;
+	position: relative;
+}
+
+.nav-header {
+	margin-top: 10px;
+	height: 50px;
+	border: 1px solid #333;
+}
+
+.nav-header .nav-header-ul {
+	text-decoration: none;
+	list-style: none;
+	display: flex;
+	padding: 10px;
+}
+
+.nav-header .nav-header-ul #nav-header-li {
+	padding: 5px 15px;
+	border: 1px solid #333;
+	color: rgb(82, 5, 5);
+}
+
+.nav-table {
+	height: 500px;
+	border: 1px solid #333;
+}
+
+.btn-thembao-a {
+	padding: 15px 15px;
+	border: 1px solid #111;
+	margin-left: 20px;
+}
+
+.btn-thembao :hover {
+	background-color: #17a2b8;
+}
+.item{
+    width: 160px;
+    height: fit-content;
+    position: relative;
+}
+
+.item1{
+    position: relative;
+}
+.add_KhuyenMai {
+    box-sizing: border-box;
+    width: 1140px;
+    min-height: 400px;
+    margin: 0 auto;
+    padding: 5px;
+    background: #EBFAFE;
+}
+
+.KhuyenMai {
+    box-sizing: content-box;
+    width: inherit;
+    height: 250px;
+    padding: 50px;
+    float: left;
+    display: flex;
+
+}
+
+.picture_product {
+    margin: 0px;
+}
+
+.picture_product img {
+    width: 200px;
+    height: 250px;
+}
+
+.infor_product {
+    margin: 0px 0px 0px 70px;
+
+}
+
+.infor_product .infor {
+    padding-top: 20px;
+}

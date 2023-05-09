@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  	<title>Đơn hàng</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="../css/PageDatBao.css">
+
+	</head>
+	<body>
+		<input id="usersId" type="hidden" th:value="${usersId}" />
+	<input id="gioHangId" type="hidden" th:value="${gioHangId}" />
+	<div id="wapper">
+		<nav>
+			<ul class="menu">
+				<li><a th:href="@{/bao}"><i><img src="../img/logo.jpg"
+							alt=""></i></a></li>
+				<li><p id="menu-css">Xin chào đến với trang đặt báo giấy
+						IUH</p></li>
+			</ul>
+			<span>
+				<ul>
+					<li><a sec:authorize="hasAuthority('CUSTOMER')"
+						class="menu-cart"
+						th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
+							src="../img/icon/akar-icons_cart.svg">Giỏ hàng | </a></li>
+					<li>Hi <i sec:authentication="name"></i>!
+					</li>
+				</ul>
+			</span>
+		</nav>
+	</div>
+	<section class="ftco-section">
+		<div class="container">
+			
+				<div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required" th:each="todoitem1 : ${donhang}">
+				<input class="input100" type="text" name="maHoaDon" placeholder="mahoadon" th:value="'Mã đơn hàng:' +${todoitem1.id}" disabled>
+					<input class="input100" type="text"  placeholder="Ngày đặt hàng" th:value="'Ngày lập đơn hàng:    '+ ${#dates.format(todoitem1.ngayTaoDonHang, 'dd-MM-YYYY')}" disabled>
+					
+					<input class="input100" type="text" name="hoTen" placeholder="Họ tên" th:value="'Tên khách hàng:    '+ ${todoitem1.tenKhachHang}" disabled>
+					<input class="input100" type="text" name="SDT" placeholder="SĐT"  th:value="'Số điện thoại:       '+${todoitem1.SDT}" disabled>
+					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ" th:value="'Địa chỉ nhận báo:  '+${todoitem1.diaChiNhanHang}" disabled>
+					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ" th:value="'Hình thức thanh toán:  '+${todoitem1.hinhThucThanhToan}" disabled>
+					<input class="input100" type="text" name="trangThai" placeholder="Trạng thái đơn hàng" th:value="'Trạng thái đơn hàng :  '+${todoitem1.trangThaiDonHang}" disabled>
+				</div>
+		
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="h3 mb-0 text-center">Sản Phẩm Chọn Mua</h3>
+					<div class="table-wrap">
+						<table class="table myaccordion table-hover" id="accordion">
+						  <thead>
+						    <tr>
+						      <th>Tên Sản Phẩm</th>
+						      <th>Ngày bắt đầu</th>
+						      <th>Ngày kết thúc</th>
+						      <th>Số kì</th>
+							  <th>Số lượng</th>
+							  <th>Đơn giá</th>
+							  <th>Thành tiền</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" th:each="todoitem : ${donhang.chiTietDonHang}">
+						      <td th:text="${todoitem.tenBao}"></td>
+						      <td><input type="text" name="ngayKetThucDatBao"
+										placeholder="Date From"
+										th:value="${#dates.format(todoitem.ngayDatBao, 'dd-MM-YYYY')}"
+										style="width: 100px" disabled ></td>
+						      <td><input type="text" name="ngayKetThucDatBao"
+										placeholder="Date From"
+										th:value="${#dates.format(todoitem.ngatKetThucDatBao, 'dd-MM-YYYY')}"
+										style="width: 100px" disabled></td>
+							  <td th:text="${todoitem.soKy}" name="soKy"></td>
+							  <td  th:text="${todoitem.soLuong}"></td>
+							  <td  th:text="${todoitem.donGia}"></td>
+						     <td th:text="${#numbers.formatDecimal(todoitem.thanhTien, 0, 'COMMA', 0, 'POINT')}+ ' đ'">
+						    </tr>
+
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="handle-cart">
+			<div class="section-thanh-toan">
+				<ul class="section-khuyenmai">
+					<li style="list-style: none;">
+						<tr> </tr>
+					</li>
+
+				</ul>
+			</div>
+			<div class="article-thanhToan">
+				<ul id="article-ul-right" th:each="todoitem2 : ${donhang}">
+					<br><br>
+					<li>
+						<tr >Tổng tiền hàng: </tr>
+						<tr>......................</tr>
+						 <tr th:text="${#numbers.formatDecimal(todoitem2.tongThanhTien, 0, 'COMMA', 0, 'POINT')}+ ' đ'"> </tr>
+					</li>
+					<li>
+						<tr>Khuyến mãi: </tr>
+						<tr>..........................</tr>
+						<tr th:text="${#numbers.formatDecimal(todoitem2.giaTriGiam, 0, 'COMMA', 0, 'POINT')}+ ' đ'"> </tr>
+					</li>
+					<li>
+						<tr>Tổng tiền thanh toán: </tr>
+						<tr>............</tr>
+						<tr th:text="${#numbers.formatDecimal(todoitem2.tongTienDonHang, 0, 'COMMA', 0, 'POINT')}+ ' đ'"> </tr>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	
+	</body>
+</html>
+

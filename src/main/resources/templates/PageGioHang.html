@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Giỏ hàng</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
+	rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="../css/PageDatBao.css">
+
+</head>
+<body>
+<input id="usersId" type="hidden" th:value="${usersId}" />
+	<input id="gioHangId" type="hidden" th:value="${gioHangId}" />
+	<div id="wapper">
+		<nav>
+			<ul class="menu">
+				<li><a th:href="@{/bao}"><i><img src="../img/logo.jpg"
+							alt=""></i></a></li>
+				<li><p id="menu-css">Xin chào đến với trang đặt báo giấy
+						IUH</p></li>
+			</ul>
+			<span>
+				<ul>
+					<li><a sec:authorize="hasAuthority('CUSTOMER')"
+						class="menu-cart"
+						th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
+							src="../img/icon/akar-icons_cart.svg">Giỏ hàng | </a></li>
+					<li>Hi <i sec:authentication="name"></i>!
+					</li>
+				</ul>
+			</span>
+		</nav>
+	</div>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="wrap-input100 validate-input m-b-16"
+				data-validate="Username is required">
+				<input class="input100" type="text" name="diaChi"
+					placeholder="Địa chỉ nhận hàng" id="diachinhanbao"> <input
+					class="input100" type="text" placeholder="Nơi nhập khuyến mãi" id="txtKhuyenMai">
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+						<table class="table myaccordion table-hover" id="accordion">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Chọn</th>
+									<th>Tên Sản Phẩm</th>
+									<th>Ngày bắt đầu</th>
+									<th>Ngày kết thúc</th>
+									<th>Số kì</th>
+									<th>Số lượng</th>
+									<th>Đơn giá</th>
+									<th>Thành tiền</th>
+									<th>Hành động</th>
+								</tr>
+							</thead>
+
+							<tbody>
+
+								<tr data-toggle="collapse" data-target="#collapseOne"
+									aria-expanded="true" aria-controls="collapseOne"
+									th:each="todoitem : ${giohangId.chiTietGioHang}">
+									<td th:text="${todoitem.baoId}" name="baoId"></td>
+
+									<td scope="row"><input type="checkbox"
+										th:value="${todoitem.baoId} + '-' + ${todoitem.gioHangId}"
+										class="checkbox_baoId"></td>
+									<td th:text="${todoitem.tenBao}" name="tenBao"></td>
+
+									<td><input type="text" name="ngayDatBao"
+										placeholder="Date From"
+										th:value="${#dates.format(todoitem.ngayDatBao, 'yyyy-MM-dd')}"><input
+										type="hidden" th:value=${todoitem.baoId} id="txtId"></td>
+
+									<td><input type="text" name="ngayKetThucDatBao"
+										placeholder="Date From"
+										th:value="${#dates.format(todoitem.ngaytKetThucDatBao, 'yyyy-MM-dd')}">
+									</td>
+
+									<td th:text="${todoitem.soKy}" name="soKy"></td>
+
+									<td><input type="number"
+										style="width: 50px; text-align: center" value="1"
+										th:value="${todoitem.soLuong}" name="soLuong"></td>
+									<td th:text="${todoitem.donGia}" name="donGia"></td>
+
+									<td th:text="${todoitem.thanhTien}" name="thanhTien"></td>
+									<td>
+										<Button
+											th:onclick="'confirm_form_delete(event, ' + ${todoitem.baoId} + ', ' + ${todoitem.gioHangId} + ')'">
+											Xoá</Button>
+
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="handle-cart">
+			<div class="section-thanh-toan"></div>
+			<div class="article-thanhToan">
+				<ul id="article-ul-right">
+					<li>
+						<tr>
+							<td>
+								<!-- <a href="" th:onclick="mua_bao()"style="border: #333 solid;">Mua Báo</a> -->
+								<Button class="btn-ul-li-dathang" th:onclick="mua_bao()">Mua
+									báo</Button>
+							</td>
+						</tr>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<script>
+	function GetTodayDate() {
+		   var today = new Date();
+		   var dd = String(today.getDate()).padStart(2, '0');
+		   var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+		   var yyyy = today.getFullYear();
+		   today= yyyy+'-'+mm+'-'+dd;
+		   return today;
+		}
+	
+		function confirm_form_delete(event, baoId,gioHangId){
+			 var datbao = {
+					 "baoId": $('#txtId').val(),
+					 "gioHangId": $('#gioHangId').val()
+	            };
+			$.ajax({
+      		  type: "POST",
+      		  url: '../giohang3',
+      		  contentType: 'application/json; charset=utf-8',
+      		  data: JSON.stringify(datbao),
+      		  success: function( data ) {
+      			$(event.target).parents('tr').remove()
+          	  },
+      		});
+			}
+		
+		function mua_bao() {
+			var laycheckbox=document.getElementsByClassName("checkbox_baoId");
+			 var result = "";
+			/* for(var i=0;i<laycheckbox.length;i++) {
+				if(laycheckbox[i].checked==true) {
+					result += ' [' + laycheckbox[i].value + ']';
+					}
+				} */
+			var datbao= {
+			        "maKhachHang":  $('#usersId').val(),
+			        "maKhuyenMai":$('#txtKhuyenMai').val() ,
+			        "ngayTaoDonHang": GetTodayDate(),
+			        "trangThaiDonHang": "Chờ xử lý",
+			        "diaChiNhanHang": $('#diachinhanbao').val(),
+			        "hinhThucThanhToan": "Tại nhà",
+			        "chiTietDonHang": [],
+		}
+			$('.checkbox_baoId:checked').each(function(index, ele) {
+				var parent = $(ele).parents('tr');
+				var chiTietDonHang = {
+	                "mabao": parent.find('td[name="baoId"]').text(),
+	                "tenBao": parent.find('td[name="tenBao"]').text(),
+	                "ngayDatBao": parent.find('input[name="ngayDatBao"]').val(),
+	                "ngatKetThucDatBao": parent.find('input[name="ngayKetThucDatBao"]').val(),
+	                "soLuong": parent.find('input[name="soLuong"]').val(),
+	                "soKy": parent.find('td[name="soKy"]').text(),
+	                "donGia": parent.find('td[name="donGia"]').text(),
+	                "thanhTien": parent.find('td[name="thanhTien"]').text(),
+	   	            }
+				datbao.chiTietDonHang.push(chiTietDonHang);	
+			});
+			
+			$.ajax({
+	      		  type: "POST",
+	      		  url: '../donhang2',
+	      		  contentType: 'application/json; charset=utf-8',
+	      		  data: JSON.stringify(datbao),
+	      		  success: function( data ) {
+	      			window.location.href = '../tongdonhang/' + data;
+	          	  },
+	      		});		
+		}
+	</script>
+</body>
+</html>
+

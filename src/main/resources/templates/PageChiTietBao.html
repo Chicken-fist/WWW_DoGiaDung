@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chi tiết báo</title>
+        <link
+            href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+            rel="stylesheet" id="bootstrap-css">
+        <script
+            src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" href="../css/ChiTietBao.css">
+    </head>
+    <body>
+    <input id="usersId" type="hidden" th:value="${usersId}" />
+    	<input id="gioHangId" type="hidden" th:value="${gioHangId}" />
+	<div id="wapper">
+		<nav>
+			<ul class="menu">
+				<li><a th:href="@{/bao}"><i><img src="../img/logo.jpg"
+							alt=""></i></a></li>
+				<li><p id="menu-css">Xin chào đến với trang đặt báo giấy
+						IUH</p></li>
+			</ul>
+			<span>
+				<ul>
+					<li><a sec:authorize="hasAuthority('CUSTOMER')"
+						class="menu-cart" th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
+							src="../img/icon/akar-icons_cart.svg">Giỏ hàng | </a></li>
+					<li>Hi <i sec:authentication="name"></i>!
+					</li>
+				</ul>
+			</span>
+		</nav>
+	</div>
+        <div class="detail_product">
+            <div class="product" onchange="getsoki()" th:each="todoitem : ${bao1}">
+                <div class="picture_product">
+                    <i><img src="../img/product_demo.jpg" alt=""></i>
+                </div>
+                <div  class="infor_product">
+                    <div class="infor">
+                        <label for="txtName" style="padding-right: 30px;">Tên:</label>
+                        <input th:value="${todoitem.tenBao}" type="text" name="txtName" id="txtName" disabled>
+                        <input type="hidden"th:value="${todoitem.Id}"  id="txtId">
+                    </div>
+                    <div class="infor">
+                        <label for="txtPrice">Đơn Giá:</label>
+                        <input  th:value="${todoitem.donGia}" type="text" name="txtPrice" id="txtPrice" disabled>
+                    </div>
+                     <div class="infor">
+                        <label for="txtSoLuong">Số lượng:</label>
+                        <input  type="number" name="txtSoLuong" id="txtSoLuong" value="1"  pattern="[0-9]+">
+                    </div>
+                    <div class="infor">
+                        <label>ngày đặt báo:</label></br><br>
+                    <label for="txtorderdate" style="padding-right: 9px;" >từ
+                        ngày:</label>
+                    <input type="date" name="txtorderdate" id="txtstartorderdate"
+                        style="width: 166px;"><br><br>
+                    <label for="txtorderdate">đến ngày:</label>
+                    <input type="date" name="txtorderdate" id="txtendorderdate"
+                        style="width: 166px;">
+                        <span id="Difference_In_Days" ></span>
+                </div>
+                <div class="infor">
+                    <label for="txtdescrip" style="padding-right: 20px;">Mô Tả:</label>
+                    <input  th:value="${todoitem.moTa}"type="text" name="txtdescrip" id="txtdescrip" disabled>
+                </div>
+                <div class="submit">
+                    <button id="button_order" type="button"
+                        onclick="confirm_form()"><p>Thêm báo </p></button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    <div class="container">
+        <div class="text_other_product">
+            <p>các sản phẩm tương tự </p>
+        </div>
+        <div class="row">
+            <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1"
+                id="MultiCarousel" data-interval="1000">
+                <div class="MultiCarousel-inner">
+                    <div class="item" th:each="tempBao : ${baos}">
+                        <div class="item1">
+                            <i><img th:src="${tempBao.hinhAnh}" alt=""
+                                    id="img1"></i>
+                            <div class="order_product">
+                                <span th:text="${tempBao.getTenBao()}">Lorem ipsum dolor sit a</span>
+                                <button  >đặt báo</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                    <button class="btn btn-primary leftLst"><</button>
+                    <button class="btn btn-primary rightLst">></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+
+
+    </footer>
+    <script src="../js/detail.js"></script>
+    <script type="text/javascript">
+        function getsoki(){
+            var date1 = new Date(document.getElementById("txtstartorderdate").value) ;
+            var date2 = new Date(document.getElementById("txtendorderdate").value);
+            console.log(date1);
+            // To calculate the time difference of two dates
+            var Difference_In_Time = date2.getTime() - date1.getTime();
+            
+            // To calculate the no. of days between two dates
+            var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+            return Difference_In_Days;
+            document.getElementById("Difference_In_Days").innerHTML = Difference_In_Days;
+        }
+
+        function confirm_form() {
+        	function GetTodayDate() {
+     		   var today = new Date();
+     		   var dd = String(today.getDate()).padStart(2, '0');
+     		   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+     		   var yyyy = today.getFullYear();
+     		   today= yyyy+'-'+mm+'-'+dd;
+     		   return today;
+     		}
+            var datbao = {
+            	    "id": $('#gioHangId').val(),
+            	    "khachHangId": $('#usersId').val(),
+            	    "chiTietGioHang": [
+            	        {
+            	            "gioHangId": $('#gioHangId').val(),
+            	            "baoId": $('#txtId').val(),
+            	            "ngayDatBao": $('#txtstartorderdate').val(),
+            	            "ngaytKetThucDatBao": $('#txtendorderdate').val(),
+            	            "soLuong": $('#txtSoLuong').val(),
+            	            "soKy": getsoki(),
+            	            "donGia": $('#txtPrice').val(),
+            	        }
+           	        ]
+            };
+
+        	$.ajax({
+        		  type: "POST",
+        		  url: '../giohang2',
+        		  contentType: 'application/json; charset=utf-8',
+        		  data: JSON.stringify(datbao),
+        		  success: function( data ) {
+              	    alert( "báo đã được thêm vào giỏ hàng thành công " + data );
+            	  },
+        		});
+        }
+
+        </script>
+        </body>
+    </html>
