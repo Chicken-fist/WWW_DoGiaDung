@@ -190,7 +190,7 @@ nav span ul li {
     position: absolute;
     background-color: #666;
     text-align: center;
-    width: 100px;
+    width: 150px;
     height: 40px;
     border: 3px solid red ;
     -webkit-box-reflect: below 0px linear-gradient(transparent,#0002);
@@ -249,67 +249,7 @@ nav span ul li {
     opacity: 1;
 
 }
-#button_order::before{
-    content: "";
-    position: absolute;
-    top: 50%;
-    left:-10px;
-    width: 10px;
-    height: 2px;
-    background-color: red;
-    box-shadow: 3px -8px 0 red,
-                3px 8px 0 red;
-    transition:  left 0.5s,width 0.5s,top 0.5s,height 0.5s,box-shadow 0.5s;
-    transition-delay: 1s,0.5s,0s,0s;
-}
-#button_order:hover::before{
-    width: 50%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    box-shadow: 3px 0 0 red,
-                3px 0 0 red;
-    transition-delay: 0s,0s,0.5s,0.5s,0.5s;
-}
- #button_order::after{
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -10px;
-    width: 10px;
-    height: 2px;
-    background-color: red;
-    box-shadow: -3px -8px 0 red,
-                -3px 8px 0 red;
-    transition:  right 0.5s,width 0.5s,top 0.5s,height 0.5s,box-shadow 0.5s;
-    transition-delay: 1s,0.5s,0s,0s;
 
-            
-}
-#button_order:hover::after{
-    width: 50%;
-    height: 100%;
-    top: 0;
-    right:0;
-    box-shadow: 3px 0 0 red,
-                3px 0 0 red;
-    transition-delay: 0s,0s,0.5s,0.5s,0.5s;
-} 
-#button_order p{
-    text-transform: uppercase;
-    font-weight: 800;
-    text-align: center;
-    z-index: 100;
-    position: relative;
-    color: white;
-}
-#button_order:hover{
-    transition-delay: 1s;
-    box-shadow:0 0 20px ,
-        0 0 20px red,
-        0 0 20px red,
-        0 0 20px red ;
-}
 #button_order:hover>p{
     color: blue;
     animation: fade1 3s;

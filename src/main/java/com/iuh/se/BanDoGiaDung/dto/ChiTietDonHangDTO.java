@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChiTietDonHangDTO {
 	private int madonHang;
-	private int mabao;
-	private String tenBao;
-	private Date ngayDatBao;
-	private Date ngatKetThucDatBao;
+	private int maSanPham;
+	private String tenSanPham;
+	private Date ngayDatSanPham;
+	private Date ngatKetThucDatSanPham;
 	private double donGia;
 	private int soLuong;
 	private int soKy;

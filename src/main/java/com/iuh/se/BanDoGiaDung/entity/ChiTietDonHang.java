@@ -30,7 +30,7 @@ public class ChiTietDonHang {
 	@JoinColumn(name = "san_pham_id",insertable = false,updatable = false)
 	private SanPham san_pham;
 	
-	@Column(name = "ngay_dat_hang")
+	@Column(name = "ngay_dat_san_pham")
 	private Date ngayDatHang;
 	
 	@Column(name = "so_luong")

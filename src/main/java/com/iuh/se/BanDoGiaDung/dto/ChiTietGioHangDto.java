@@ -16,13 +16,13 @@ import lombok.NoArgsConstructor;
 public class ChiTietGioHangDto {
 	private ChiTietGioHangPk id;
 	private int gioHangId;
-	private int baoId;
-	private Date ngayDatBao;
-	private Date ngaytKetThucDatBao;
+	private int sanPhamId;
+	private Date ngayDatSanPham;
+	private Date ngaytKetThucDatSanPham;
 	private int soLuong;
 	private int soKy;
 	private double donGia;
-	private String tenBao;
+	private String tenSanPham;
 	private double thanhTien;
 	
 }

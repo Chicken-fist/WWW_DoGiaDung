@@ -42,8 +42,9 @@ public class GioHangControlerTest {
 
 
 	@PostMapping(value = "/giohang2", consumes = MediaType.ALL_VALUE)
-	public void themBaoVaoGioHang(@RequestBody GioHangDto gioHangDto) {
-		gioHangService.themBaoVaoGioHang(gioHangDto);
+	public void themSanPhamVaoGioHang(@RequestBody GioHangDto gioHangDto) {
+		System.out.println(gioHangDto);
+		gioHangService.themSanPhamVaoGioHang(gioHangDto);
 	}
 
 	@PostMapping(value = "/giohang3", consumes = MediaType.ALL_VALUE)

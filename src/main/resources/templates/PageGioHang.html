@@ -16,7 +16,7 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="../css/PageDatBao.css">
+<link rel="stylesheet" href="../css/PageDatSanPham.css">
 
 </head>
 <body>
@@ -25,7 +25,7 @@
 	<div id="wapper">
 		<nav>
 			<ul class="menu">
-				<li><a th:href="@{/bao}"><i><img src="../img/logo.jpg"
+				<li><a th:href="@{/SanPham}"><i><img src="../img/logo.jpg"
 							alt=""></i></a></li>
 				<li><p id="menu-css">Xin chào đến với trang đặt báo giấy
 						IUH</p></li>
@@ -47,7 +47,7 @@
 			<div class="wrap-input100 validate-input m-b-16"
 				data-validate="Username is required">
 				<input class="input100" type="text" name="diaChi"
-					placeholder="Địa chỉ nhận hàng" id="diachinhanbao"> <input
+					placeholder="Địa chỉ nhận hàng" id="diachinhanSanPham"> <input
 					class="input100" type="text" placeholder="Nơi nhập khuyến mãi" id="txtKhuyenMai">
 			</div>
 			<div class="row">
@@ -74,21 +74,21 @@
 								<tr data-toggle="collapse" data-target="#collapseOne"
 									aria-expanded="true" aria-controls="collapseOne"
 									th:each="todoitem : ${giohangId.chiTietGioHang}">
-									<td th:text="${todoitem.baoId}" name="baoId"></td>
+									<td th:text="${todoitem.SanPhamId}" name="SanPhamId"></td>
 
 									<td scope="row"><input type="checkbox"
-										th:value="${todoitem.baoId} + '-' + ${todoitem.gioHangId}"
-										class="checkbox_baoId"></td>
-									<td th:text="${todoitem.tenBao}" name="tenBao"></td>
+										th:value="${todoitem.SanPhamId} + '-' + ${todoitem.gioHangId}"
+										class="checkbox_SanPhamId"></td>
+									<td th:text="${todoitem.tenSanPham}" name="tenSanPham"></td>
 
-									<td><input type="text" name="ngayDatBao"
+									<td><input type="text" name="ngayDatSanPham"
 										placeholder="Date From"
-										th:value="${#dates.format(todoitem.ngayDatBao, 'yyyy-MM-dd')}"><input
-										type="hidden" th:value=${todoitem.baoId} id="txtId"></td>
+										th:value="${#dates.format(todoitem.ngayDatSanPham, 'yyyy-MM-dd')}"><input
+										type="hidden" th:value=${todoitem.SanPhamId} id="txtId"></td>
 
-									<td><input type="text" name="ngayKetThucDatBao"
+									<td><input type="text" name="ngayKetThucDatSanPham"
 										placeholder="Date From"
-										th:value="${#dates.format(todoitem.ngaytKetThucDatBao, 'yyyy-MM-dd')}">
+										th:value="${#dates.format(todoitem.ngaytKetThucDatSanPham, 'yyyy-MM-dd')}">
 									</td>
 
 									<td th:text="${todoitem.soKy}" name="soKy"></td>
@@ -101,7 +101,7 @@
 									<td th:text="${todoitem.thanhTien}" name="thanhTien"></td>
 									<td>
 										<Button
-											th:onclick="'confirm_form_delete(event, ' + ${todoitem.baoId} + ', ' + ${todoitem.gioHangId} + ')'">
+											th:onclick="'confirm_form_delete(event, ' + ${todoitem.SanPhamId} + ', ' + ${todoitem.gioHangId} + ')'">
 											Xoá</Button>
 
 									</td>
@@ -119,8 +119,8 @@
 					<li>
 						<tr>
 							<td>
-								<!-- <a href="" th:onclick="mua_bao()"style="border: #333 solid;">Mua Báo</a> -->
-								<Button class="btn-ul-li-dathang" th:onclick="mua_bao()">Mua
+								<!-- <a href="" th:onclick="mua_SanPham()"style="border: #333 solid;">Mua Báo</a> -->
+								<Button class="btn-ul-li-dathang" th:onclick="mua_SanPham()">Mua
 									báo</Button>
 							</td>
 						</tr>
@@ -140,59 +140,59 @@
 		   return today;
 		}
 	
-		function confirm_form_delete(event, baoId,gioHangId){
-			 var datbao = {
-					 "baoId": $('#txtId').val(),
+		function confirm_form_delete(event, SanPhamId,gioHangId){
+			 var datSanPham = {
+					 "sanPhamId": $('#txtId').val(),
 					 "gioHangId": $('#gioHangId').val()
 	            };
 			$.ajax({
       		  type: "POST",
       		  url: '../giohang3',
       		  contentType: 'application/json; charset=utf-8',
-      		  data: JSON.stringify(datbao),
+      		  data: JSON.stringify(datSanPham),
       		  success: function( data ) {
       			$(event.target).parents('tr').remove()
           	  },
       		});
 			}
 		
-		function mua_bao() {
-			var laycheckbox=document.getElementsByClassName("checkbox_baoId");
+		function mua_SanPham() {
+			var laycheckbox=document.getElementsByClassName("checkbox_SanPhamId");
 			 var result = "";
 			/* for(var i=0;i<laycheckbox.length;i++) {
 				if(laycheckbox[i].checked==true) {
 					result += ' [' + laycheckbox[i].value + ']';
 					}
 				} */
-			var datbao= {
+			var datSanPham= {
 			        "maKhachHang":  $('#usersId').val(),
 			        "maKhuyenMai":$('#txtKhuyenMai').val() ,
 			        "ngayTaoDonHang": GetTodayDate(),
 			        "trangThaiDonHang": "Chờ xử lý",
-			        "diaChiNhanHang": $('#diachinhanbao').val(),
+			        "diaChiNhanHang": $('#diachinhanSanPham').val(),
 			        "hinhThucThanhToan": "Tại nhà",
 			        "chiTietDonHang": [],
 		}
-			$('.checkbox_baoId:checked').each(function(index, ele) {
+			$('.checkbox_SanPhamId:checked').each(function(index, ele) {
 				var parent = $(ele).parents('tr');
 				var chiTietDonHang = {
-	                "mabao": parent.find('td[name="baoId"]').text(),
-	                "tenBao": parent.find('td[name="tenBao"]').text(),
-	                "ngayDatBao": parent.find('input[name="ngayDatBao"]').val(),
-	                "ngatKetThucDatBao": parent.find('input[name="ngayKetThucDatBao"]').val(),
+	                "maSanPham": parent.find('td[name="SanPhamId"]').text(),
+	                "tenSanPham": parent.find('td[name="tenSanPham"]').text(),
+	                "ngayDatSanPham": parent.find('input[name="ngayDatSanPham"]').val(),
+	                "ngatKetThucDatSanPham": parent.find('input[name="ngayKetThucDatSanPham"]').val(),
 	                "soLuong": parent.find('input[name="soLuong"]').val(),
 	                "soKy": parent.find('td[name="soKy"]').text(),
 	                "donGia": parent.find('td[name="donGia"]').text(),
 	                "thanhTien": parent.find('td[name="thanhTien"]').text(),
 	   	            }
-				datbao.chiTietDonHang.push(chiTietDonHang);	
+				datSanPham.chiTietDonHang.push(chiTietDonHang);	
 			});
 			
 			$.ajax({
 	      		  type: "POST",
 	      		  url: '../donhang2',
 	      		  contentType: 'application/json; charset=utf-8',
-	      		  data: JSON.stringify(datbao),
+	      		  data: JSON.stringify(datSanPham),
 	      		  success: function( data ) {
 	      			window.location.href = '../tongdonhang/' + data;
 	          	  },

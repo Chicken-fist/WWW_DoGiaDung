@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class XoaChiTietGioHangDto {
 
 	private int gioHangId;
-	private int baoId;
+	private int SanPhamId;
 	
 }

@@ -14,7 +14,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 	
-<title> Quản lý báo</title>
+<title> Quản lý Sản phẩm</title>
 </head>
 <body>
 	<div id="wapper">
@@ -34,7 +34,7 @@
 	</div>
 	<div class="nav-header">
 		<ul class="nav-header-ul">
-			<li id="nav-header-li"><a id="123" th:href="@{/admin/bao/show}">Sản
+			<li id="nav-header-li"><a id="123" th:href="@{/admin/SanPham/show}">Sản
 					phẩm</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/donHang/doanhThu/show}">Doanh thu</a></li>
@@ -49,14 +49,14 @@
 	<br>
 	<br>
 
-		<form class="add_KhuyenMai" th:object="${bao}" th:action="@{/admin/bao/addbao}" method="POST">
+		<form class="add_KhuyenMai" th:object="${SanPham}" th:action="@{/admin/SanPham/addSanPham}" method="POST">
             <div class="KhuyenMai">
                 <div class="infor_product">
                     <div class="infor">
                     	<input th:field="*{id}" type="hidden" name="txtid" id="txtid">
 
                         <label for="txtName" style="padding-right: 30px;">Tên báo :</label>
-                        <input th:field="*{tenBao}" type="text" name="txtName" id="txtName"pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹế 0123456789 '\\s]+$"  title="Tên báo không có kí tự đặt biệt" >
+                        <input th:field="*{tenSanPham}" type="text" name="txtName" id="txtName"pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹế 0123456789 '\\s]+$"  title="Tên báo không có kí tự đặt biệt" >
                     </div>
                     <div class="infor" >
                     <label for="txtstartday" style="padding-right: 25px;">Hình Ảnh:</label>

@@ -10,6 +10,6 @@ public interface GioHangService {
 		public GioHangDto layGioHangTheoId(int id);
 		public String  xoaGioHang(int id);
 		public void luuGioHang(GioHangDto gioHangDto);
-		public void themBaoVaoGioHang(GioHangDto gioHangDto);
+		public void themSanPhamVaoGioHang(GioHangDto gioHangDto);
 		public void xoaChiTietGioHang(XoaChiTietGioHangDto xoaChiTietGioHangDto);
 }

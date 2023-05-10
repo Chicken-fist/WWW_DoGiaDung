@@ -40,7 +40,7 @@ public class GioHangServiceImpl implements GioHangService {
 	private ChiTietGioHangService chiTietGioHangService;
 	
 	@Autowired
-	private SanPhamRepository baoRepository;
+	private SanPhamRepository SanPhamRepository;
 	
 	@Autowired
 	private ChiTietGioHangRepository chiTietGioHangRepository;
@@ -48,7 +48,7 @@ public class GioHangServiceImpl implements GioHangService {
 	@Override
 	public GioHangDto layGioHangTheoId(int id) {
 		GioHang gioHang = gioHangRepository.findById(id).orElse(null);
-		List<SanPham> sanPhams = baoRepository.findAll();
+		List<SanPham> sanPhams = SanPhamRepository.findAll();
 
 		if (Objects.isNull(gioHang)) {
 			return null;
@@ -77,10 +77,10 @@ public class GioHangServiceImpl implements GioHangService {
 			for (ChiTietGioHangDto chiTietGioHangDto : gioHangDto.getChiTietGioHang()) {
 				ChiTietGioHang chiTietGioHang = new ChiTietGioHang();
 				chiTietGioHang
-						.setId(new ChiTietGioHangPk(chiTietGioHangDto.getBaoId(), chiTietGioHangDto.getGioHangId()));
-				chiTietGioHang.setSanPham(new SanPham(chiTietGioHangDto.getBaoId()));
+						.setId(new ChiTietGioHangPk(chiTietGioHangDto.getSanPhamId(), chiTietGioHangDto.getGioHangId()));
+				chiTietGioHang.setSanPham(new SanPham(chiTietGioHangDto.getSanPhamId()));
 				chiTietGioHang.setGioHang(new GioHang(chiTietGioHangDto.getGioHangId()));
-				chiTietGioHang.setNgayDatSanPham(chiTietGioHangDto.getNgayDatBao());
+				chiTietGioHang.setNgayDatSanPham(chiTietGioHangDto.getNgayDatSanPham());
 				chiTietGioHang.setSoLuong(chiTietGioHangDto.getSoLuong());
 				chiTietGioHangs.add(chiTietGioHang);
 			}
@@ -98,25 +98,25 @@ public class GioHangServiceImpl implements GioHangService {
 
 	@Transactional
 	@Override
-	public void themBaoVaoGioHang(GioHangDto gioHangDto) {
+	public void themSanPhamVaoGioHang(GioHangDto gioHangDto) {
 
 		Optional<GioHang> gioHangOpt = gioHangRepository.findById(gioHangDto.getId());
 		if (gioHangOpt.isPresent()) {
 
 			ChiTietGioHangDto chiTietGioHangDto = gioHangDto.getChiTietGioHang().iterator().next();
-			Optional<SanPham> baoOpt = baoRepository.findById(chiTietGioHangDto.getBaoId());
-			if (baoOpt.isPresent()) {
-				SanPham sanPham = baoOpt.get();
+			Optional<SanPham> SanPhamOpt = SanPhamRepository.findById(chiTietGioHangDto.getSanPhamId());
+			if (SanPhamOpt.isPresent()) {
+				SanPham sanPham = SanPhamOpt.get();
 				GioHang gioHang = gioHangOpt.get();
 				gioHang.getDsChiTietGioHang().removeIf(item -> item.getSanPham().getId()==sanPham.getId());
-				chiTietGioHangRepository.deleteByGioHangAndSanPham(gioHang.getid(), sanPham.getId());
+//				chiTietGioHangRepository.deleteByGioHangAndSanPham(gioHang.getid(), sanPham.getId());
 
 				ChiTietGioHang chiTietGioHang = new ChiTietGioHang();
 				chiTietGioHang
-						.setId(new ChiTietGioHangPk(chiTietGioHangDto.getBaoId(), chiTietGioHangDto.getGioHangId()));
-				chiTietGioHang.setSanPham(new SanPham(chiTietGioHangDto.getBaoId()));
+						.setId(new ChiTietGioHangPk(chiTietGioHangDto.getSanPhamId(), chiTietGioHangDto.getGioHangId()));
+				chiTietGioHang.setSanPham(new SanPham(chiTietGioHangDto.getSanPhamId()));
 				chiTietGioHang.setGioHang(new GioHang(chiTietGioHangDto.getGioHangId()));
-				chiTietGioHang.setNgayDatSanPham(chiTietGioHangDto.getNgayDatBao());
+				chiTietGioHang.setNgayDatSanPham(chiTietGioHangDto.getNgayDatSanPham());
 				chiTietGioHang.setSoLuong(chiTietGioHangDto.getSoLuong());
 				chiTietGioHangRepository.save(chiTietGioHang);
 				gioHangRepository.save(gioHang);
@@ -127,7 +127,7 @@ public class GioHangServiceImpl implements GioHangService {
 
 	@Override
 	public void xoaChiTietGioHang(XoaChiTietGioHangDto xoaChiTietGioHangDto) {
-		chiTietGioHangRepository.deleteById(new ChiTietGioHangPk(xoaChiTietGioHangDto.getBaoId(),xoaChiTietGioHangDto.getGioHangId()));
+		chiTietGioHangRepository.deleteById(new ChiTietGioHangPk(xoaChiTietGioHangDto.getSanPhamId(),xoaChiTietGioHangDto.getGioHangId()));
 		
 	}
 

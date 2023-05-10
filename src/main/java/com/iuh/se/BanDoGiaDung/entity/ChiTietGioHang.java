@@ -14,49 +14,138 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
+//@Entity
+//@Table(name = "chi_tiet_gio_hang")
+//public class ChiTietGioHang implements Serializable {
+//	/**
+//	 * 
+//	 */
+//	private static final long serialVersionUID = 1L;
+//
+//	@EmbeddedId
+//	@AttributeOverrides({
+//			@AttributeOverride(name = "gioHangId", column = @Column(name = "gio_hang_id", nullable = false)), 
+//	@AttributeOverride(name = "sanPhamId", column = @Column(name = "san_pham_id", nullable = false))})
+//	private ChiTietGioHangPk id;
+//
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "san_pham_id", insertable = false, updatable = false)
+//	private SanPham san_pham;
+//	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "gio_hang_id", insertable = false, updatable = false)
+//	private GioHang gioHang;
+//	
+//	@Column(name = "ngay_dat_san_pham")
+//	private Date ngayDatSanPham;
+//	
+//	@Column(name = "so_luong")
+//	private int soLuong;
+//
+//	public void setId(ChiTietGioHangPk id) {
+//		this.id = id;
+//	}
+//
+//	public ChiTietGioHangPk getId() {
+//		return id;
+//	}
+//
+//	public ChiTietGioHang(ChiTietGioHangPk id, SanPham sanPham, GioHang gioHang, Date ngayDatSanPham,
+//			Date ngayKetThucDatSanPham, int soKy, int soLuong) {
+//		super();
+//		this.id = id;
+//		this.san_pham = sanPham;
+//		this.gioHang = gioHang;
+//		this.ngayDatSanPham = ngayDatSanPham;
+//		this.soLuong = soLuong;
+//	}
+//
+//	public ChiTietGioHang() {
+//		super();
+//	}
+//
+//	public SanPham getSanPham() {
+//		return san_pham;
+//	}
+//
+//	public void setSanPham(SanPham sanPham) {
+//		this.san_pham = sanPham;
+//	}
+//
+//	public GioHang getGioHang() {
+//		return gioHang;
+//	}
+//
+//	public void setGioHang(GioHang gioHang) {
+//		this.gioHang = gioHang;
+//	}
+//
+//	public Date getNgayDatSanPham() {
+//		return ngayDatSanPham;
+//	}
+//
+//	public void setNgayDatSanPham(Date date) {
+//		this.ngayDatSanPham = date;
+//	}
+//
+//	public int getSoLuong() {
+//		return soLuong;
+//	}
+//
+//	public void setSoLuong(int soLuong) {
+//		this.soLuong = soLuong;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "ChiTietGioHang [id=" + id + ", SanPham=" + san_pham + ", gioHang=" + gioHang + ", ngayDatSanPham="
+//				+ ngayDatSanPham  +  " , soLuong=" + soLuong + "]";
+//	}
+//
+//}
+
 @Entity
 @Table(name = "chi_tiet_gio_hang")
 public class ChiTietGioHang implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "gioHangId", column = @Column(name = "gio_hang_id", nullable = false)), 
-	@AttributeOverride(name = "sanPhamId", column = @Column(name = "san_pham_id", nullable = false))})
+	@AttributeOverrides({ @AttributeOverride(name = "sanPhamId", column = @Column(name = "san_pham_id", nullable = false)),
+			@AttributeOverride(name = "gioHangId", column = @Column(name = "gio_hang_id", nullable = false)) })
 	private ChiTietGioHangPk id;
-
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "san_pham_id", insertable = false, updatable = false)
+	@JoinColumn(name = "san_pham_id",insertable = false,updatable = false)
 	private SanPham san_pham;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "gio_hang_id", insertable = false, updatable = false)
+	@JoinColumn(name = "gio_hang_id",insertable = false,updatable = false)
 	private GioHang gioHang;
-	
 	@Column(name = "ngay_dat_san_pham")
 	private Date ngayDatSanPham;
-	
+	@Column(name = "ngay_ket_thuc_dat_san_pham")
+	private Date ngayKetThucDatSanPham;
+	@Column(name = "so_ky")
+	private int soKy;
 	@Column(name = "so_luong")
 	private int soLuong;
+
+	
+	
 
 	public void setId(ChiTietGioHangPk id) {
 		this.id = id;
 	}
-
+	
 	public ChiTietGioHangPk getId() {
 		return id;
 	}
 
-	public ChiTietGioHang(ChiTietGioHangPk id, SanPham sanPham, GioHang gioHang, Date ngayDatSanPham,
+	public ChiTietGioHang(ChiTietGioHangPk id, SanPham SanPham, GioHang gioHang, Date ngayDatSanPham,
 			Date ngayKetThucDatSanPham, int soKy, int soLuong) {
 		super();
 		this.id = id;
-		this.san_pham = sanPham;
+		this.san_pham = SanPham;
 		this.gioHang = gioHang;
 		this.ngayDatSanPham = ngayDatSanPham;
+		this.ngayKetThucDatSanPham = ngayKetThucDatSanPham;
+		this.soKy = soKy;
 		this.soLuong = soLuong;
 	}
 
@@ -68,8 +157,8 @@ public class ChiTietGioHang implements Serializable {
 		return san_pham;
 	}
 
-	public void setSanPham(SanPham sanPham) {
-		this.san_pham = sanPham;
+	public void setSanPham(SanPham SanPham) {
+		this.san_pham = SanPham;
 	}
 
 	public GioHang getGioHang() {
@@ -88,6 +177,22 @@ public class ChiTietGioHang implements Serializable {
 		this.ngayDatSanPham = date;
 	}
 
+	public Date getNgayKetThucDatSanPham() {
+		return ngayKetThucDatSanPham;
+	}
+
+	public void setNgayKetThucDatSanPham(Date ngayKetThucDatSanPham) {
+		this.ngayKetThucDatSanPham = ngayKetThucDatSanPham;
+	}
+
+	public int getSoKy() {
+		return soKy;
+	}
+
+	public void setSoKy(int soKy) {
+		this.soKy = soKy;
+	}
+
 	public int getSoLuong() {
 		return soLuong;
 	}
@@ -98,8 +203,8 @@ public class ChiTietGioHang implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ChiTietGioHang [id=" + id + ", SanPham=" + san_pham + ", gioHang=" + gioHang + ", ngayDatSanPham="
-				+ ngayDatSanPham  +  " , soLuong=" + soLuong + "]";
+		return "ChiTietGioHang [id=" + id + ", SanPham=" + san_pham + ", gioHang=" + gioHang + ", ngayDatSanPham=" + ngayDatSanPham
+				+ ", ngayKetThucDatSanPham=" + ngayKetThucDatSanPham + ", soKy=" + soKy + ", soLuong=" + soLuong + "]";
 	}
 
 }

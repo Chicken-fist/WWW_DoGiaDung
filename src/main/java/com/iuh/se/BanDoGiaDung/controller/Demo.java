@@ -19,8 +19,8 @@ public class Demo {
 		return "PageQuanLyHoaDon";
 	}
 
-	@GetMapping(value = "/chitietbao", consumes = MediaType.ALL_VALUE)
+	@GetMapping(value = "/chitietSanPham", consumes = MediaType.ALL_VALUE)
 	public String DemoQuanLyChiTiet() {
-		return "PageChiTietBao";
+		return "PageChiTietSanPham";
 	}
 }

@@ -34,37 +34,37 @@ public class ChiTietGioHangConvert {
 		
 		
 		
-		SanPhamDto baoDto = sanPhamService.laySanPhamTheoID(chiTietGioHangDto.getBaoId());
-		chiTietGioHang.setSanPham(sanPhamConvert.chuyenSanPhamEntity(baoDto));
+		SanPhamDto SanPhamDto = sanPhamService.laySanPhamTheoID(chiTietGioHangDto.getSanPhamId());
+		chiTietGioHang.setSanPham(sanPhamConvert.chuyenSanPhamEntity(SanPhamDto));
 		
 		GioHangDto gioHangDto = gioHangService.layGioHangTheoId(chiTietGioHangDto.getGioHangId());
 		chiTietGioHang.setGioHang(gioHangConvert.chuyenGioHangEntity(gioHangDto));
 		
 	
-		ChiTietGioHangPk chiTietGioHangPk = new ChiTietGioHangPk(chiTietGioHangDto.getBaoId(), chiTietGioHangDto.getGioHangId());
+		ChiTietGioHangPk chiTietGioHangPk = new ChiTietGioHangPk(chiTietGioHangDto.getSanPhamId(), chiTietGioHangDto.getGioHangId());
 		
 				chiTietGioHang.setId(chiTietGioHangPk);
 		
-		chiTietGioHang.setNgayDatSanPham(chiTietGioHangDto.getNgayDatBao());
+		chiTietGioHang.setNgayDatSanPham(chiTietGioHangDto.getNgayDatSanPham());
 		chiTietGioHang.setSoLuong(chiTietGioHangDto.getSoLuong());
 		
 		
 		return chiTietGioHang;
 	}
 
-	public ChiTietGioHangDto chuyenChiTietGioHangDto(ChiTietGioHang chiTietGioHang, List<SanPham>  baos2) {
+	public ChiTietGioHangDto chuyenChiTietGioHangDto(ChiTietGioHang chiTietGioHang, List<SanPham>  SanPhams2) {
 		ChiTietGioHangDto chiTietGioHangDto = new ChiTietGioHangDto();
 		
 		ChiTietGioHangPk chiTietGioHangPk = new ChiTietGioHangPk(chiTietGioHang.getSanPham().getId(), chiTietGioHang.getGioHang().getid());
 		chiTietGioHangDto.setId(chiTietGioHangPk);
 		
-		chiTietGioHangDto.setBaoId(chiTietGioHang.getSanPham().getId());
+		chiTietGioHangDto.setSanPhamId(chiTietGioHang.getSanPham().getId());
 		chiTietGioHangDto.setGioHangId(chiTietGioHang.getGioHang().getid());
-		chiTietGioHangDto.setNgayDatBao(chiTietGioHang.getNgayDatSanPham());
+		chiTietGioHangDto.setNgayDatSanPham(chiTietGioHang.getNgayDatSanPham());
 		chiTietGioHangDto.setSoLuong(chiTietGioHang.getSoLuong());
 		
 		chiTietGioHangDto.setDonGia(chiTietGioHang.getSanPham().getDonGia());
-		chiTietGioHangDto.setTenBao(chiTietGioHang.getSanPham().getTenSanPham());
+		chiTietGioHangDto.setTenSanPham(chiTietGioHang.getSanPham().getTenSanPham());
 		chiTietGioHangDto.setThanhTien(chiTietGioHang.getSanPham().getDonGia()*chiTietGioHang.getSoLuong());
 		
 		return chiTietGioHangDto;

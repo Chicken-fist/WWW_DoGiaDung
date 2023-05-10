@@ -25,7 +25,7 @@
     </div>
 	<div class="nav-header">
 		<ul class="nav-header-ul">
-			<li id="nav-header-li"><a id="123" th:href="@{/admin/bao/show}">Sản
+			<li id="nav-header-li"><a id="123" th:href="@{/admin/SanPham/show}">Sản
 					phẩm</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/donHang/doanhThu/show}">Doanh thu</a></li>
@@ -91,8 +91,8 @@
         </tbody>
       </table>
       <br>
-      <div class="btn-thembao">
-        <p class="btn-thembao-a ">Tổng doanh thu: <b  th:text="${#numbers.formatDecimal(tongtien, 0, 'COMMA', 0, 'POINT')}+' đ'"></b></p> 
+      <div class="btn-themSanPham">
+        <p class="btn-themSanPham-a ">Tổng doanh thu: <b  th:text="${#numbers.formatDecimal(tongtien, 0, 'COMMA', 0, 'POINT')}+' đ'"></b></p> 
       </div>
 </body>
 </html>

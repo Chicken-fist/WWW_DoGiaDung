@@ -18,8 +18,8 @@ public class SanPham1TestController {
 	@Autowired
 	private SanPhamService sanPhamService;
 	
-	@GetMapping(value = "/bao/{tenSanPham}",consumes = MediaType.ALL_VALUE)
-	public List<SanPhamDto> layBaoTheoTen(@PathVariable String tenSanPham) {
+	@GetMapping(value = "/SanPham/{tenSanPham}",consumes = MediaType.ALL_VALUE)
+	public List<SanPhamDto> laySanPhamTheoTen(@PathVariable String tenSanPham) {
 		return  sanPhamService.timSanPhamTheoTen(tenSanPham);
 
 	}

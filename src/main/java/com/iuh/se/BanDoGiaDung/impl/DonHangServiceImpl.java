@@ -143,8 +143,8 @@ public class DonHangServiceImpl implements DonHangService {
 		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>();
 		for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHang()) {
 			ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
-			chiTietDonHang.setId(new ChiTietDonHangPk(donHang.getid(), chiTietDonHangDTO.getMabao()));
-			chiTietDonHang.setNgayDatHang(chiTietDonHangDTO.getNgayDatBao());
+			chiTietDonHang.setId(new ChiTietDonHangPk(donHang.getid(), chiTietDonHangDTO.getMaSanPham()));
+			chiTietDonHang.setNgayDatHang(chiTietDonHangDTO.getNgayDatSanPham());
 			chiTietDonHang.setSoLuong(chiTietDonHangDTO.getSoLuong());
 			chiTietDonHangs.add(chiTietDonHang);
 		}
@@ -154,7 +154,7 @@ public class DonHangServiceImpl implements DonHangService {
 		GioHang gioHang = gioHangRepository.findByKhachHang(users.getKhachHang());
 		for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHang()) {
 
-			chiTietGioHangRepository.deleteById(new ChiTietGioHangPk(chiTietDonHangDTO.getMabao(), gioHang.getid()));
+			chiTietGioHangRepository.deleteById(new ChiTietGioHangPk(chiTietDonHangDTO.getMaSanPham(), gioHang.getid()));
 		}
 		return donHang.getid();
 	}
@@ -191,8 +191,8 @@ public class DonHangServiceImpl implements DonHangService {
 		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>();
 		for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHang()) {
 			ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
-			chiTietDonHang.setId(new ChiTietDonHangPk(donHang.getid(), chiTietDonHangDTO.getMabao()));
-			chiTietDonHang.setNgayDatHang(chiTietDonHangDTO.getNgayDatBao());
+			chiTietDonHang.setId(new ChiTietDonHangPk(donHang.getid(), chiTietDonHangDTO.getMaSanPham()));
+			chiTietDonHang.setNgayDatHang(chiTietDonHangDTO.getNgayDatSanPham());
 			chiTietDonHang.setSoLuong(chiTietDonHangDTO.getSoLuong());
 			chiTietDonHangs.add(chiTietDonHang);
 		}

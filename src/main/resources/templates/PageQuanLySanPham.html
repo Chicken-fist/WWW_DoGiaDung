@@ -27,7 +27,7 @@
     </div>
 	<div class="nav-header">
 		<ul class="nav-header-ul">
-			<li id="nav-header-li"><a id="123" th:href="@{/admin/bao/show}">Sản
+			<li id="nav-header-li"><a id="123" th:href="@{/admin/SanPham/show}">Sản
 					phẩm</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/donHang/doanhThu/show}">Doanh thu</a></li>
@@ -41,8 +41,8 @@
 	</div>
    <br>
    <br>
-    <div class="btn-thembao">
-      <a  th:href="@{/admin/bao/put}"  class="btn-thembao-a ">Thêm Sản Phẩm</a>
+    <div class="btn-themSanPham">
+      <a  th:href="@{/admin/SanPham/put}"  class="btn-themSanPham-a ">Thêm Sản Phẩm</a>
     </div>
    <br>
     <table class="table table-hover ">
@@ -58,14 +58,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="tempbao :${dsBao}">
+          <tr th:each="tempSanPham :${dsSanPham}">
             <td scope="row" >1</td>
-            <td><img th:src="${tempbao.hinhAnh}" style="width:100px" alt=""></td>
-            <td th:text=${tempbao.tenBao}>Báo Yên Bái</td>
-            <td th:text=${tempbao.donGia}></td>
-            <td th:text=${tempbao.moTa}></td>
-            <td><a th:href="@{/admin/bao/__${tempbao.id}__}">Xoá</a></td>
-            <td><a th:href="@{/admin/bao/put/__${tempbao.id}__}">Sửa</a></td>
+            <td><img th:src="${tempSanPham.hinhAnh}" style="width:100px" alt=""></td>
+            <td th:text=${tempSanPham.tenSanPham}>Báo Yên Bái</td>
+            <td th:text=${tempSanPham.donGia}></td>
+            <td th:text=${tempSanPham.moTa}></td>
+            <td><a th:href="@{/admin/SanPham/__${tempSanPham.id}__}">Xoá</a></td>
+            <td><a th:href="@{/admin/SanPham/put/__${tempSanPham.id}__}">Sửa</a></td>
         </tr>
        
         </tbody>

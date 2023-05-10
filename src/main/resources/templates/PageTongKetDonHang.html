@@ -11,7 +11,7 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<link rel="stylesheet" href="../css/PageDatBao.css">
+	<link rel="stylesheet" href="../css/PageDatSanPham.css">
 
 	</head>
 	<body>
@@ -20,17 +20,14 @@
 	<div id="wapper">
 		<nav>
 			<ul class="menu">
-				<li><a th:href="@{/bao}"><i><img src="../img/logo.jpg"
+				<li><a th:href="@{/SanPham}"><i><img src="../img/logo.jpg"
 							alt=""></i></a></li>
 				<li><p id="menu-css">Xin chào đến với trang đặt báo giấy
 						IUH</p></li>
 			</ul>
 			<span>
 				<ul>
-					<li><a sec:authorize="hasAuthority('CUSTOMER')"
-						class="menu-cart"
-						th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
-							src="../img/icon/akar-icons_cart.svg">Giỏ hàng | </a></li>
+				
 					<li>Hi <i sec:authentication="name"></i>!
 					</li>
 				</ul>
@@ -69,14 +66,14 @@
 						  </thead>
 						  <tbody>
 						    <tr data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" th:each="todoitem : ${donhang.chiTietDonHang}">
-						      <td th:text="${todoitem.tenBao}"></td>
-						      <td><input type="text" name="ngayKetThucDatBao"
+						      <td th:text="${todoitem.tenSanPham}"></td>
+						      <td><input type="text" name="ngayKetThucDatSanPham"
 										placeholder="Date From"
-										th:value="${#dates.format(todoitem.ngayDatBao, 'dd-MM-YYYY')}"
+										th:value="${#dates.format(todoitem.ngayDatSanPham, 'dd-MM-YYYY')}"
 										style="width: 100px" disabled ></td>
-						      <td><input type="text" name="ngayKetThucDatBao"
+						      <td><input type="text" name="ngayKetThucDatSanPham"
 										placeholder="Date From"
-										th:value="${#dates.format(todoitem.ngatKetThucDatBao, 'dd-MM-YYYY')}"
+										th:value="${#dates.format(todoitem.ngatKetThucDatSanPham, 'dd-MM-YYYY')}"
 										style="width: 100px" disabled></td>
 							  <td th:text="${todoitem.soKy}" name="soKy"></td>
 							  <td  th:text="${todoitem.soLuong}"></td>

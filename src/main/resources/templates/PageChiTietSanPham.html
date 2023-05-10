@@ -11,7 +11,7 @@
         <script
             src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link rel="stylesheet" href="../css/ChiTietBao.css">
+        <link rel="stylesheet" href="../css/ChiTietSanPham.css">
     </head>
     <body>
     <input id="usersId" type="hidden" th:value="${usersId}" />
@@ -19,7 +19,7 @@
 	<div id="wapper">
 		<nav>
 			<ul class="menu">
-				<li><a th:href="@{/bao}"><i><img src="../img/logo.jpg"
+				<li><a th:href="@{/SanPham}"><i><img src="../img/logo.jpg"
 							alt=""></i></a></li>
 				<li><p id="menu-css">Xin chào đến với trang đặt báo giấy
 						IUH</p></li>
@@ -36,14 +36,14 @@
 		</nav>
 	</div>
         <div class="detail_product">
-            <div class="product" onchange="getsoki()" th:each="todoitem : ${bao1}">
+            <div class="product" onchange="getsoki()" th:each="todoitem : ${SanPham1}">
                 <div class="picture_product">
-                    <i><img src="../img/product_demo.jpg" alt=""></i>
+                    <i><img th:src="${todoitem.hinhAnh}" alt=""></i>
                 </div>
                 <div  class="infor_product">
                     <div class="infor">
                         <label for="txtName" style="padding-right: 30px;">Tên:</label>
-                        <input th:value="${todoitem.tenBao}" type="text" name="txtName" id="txtName" disabled>
+                        <input th:value="${todoitem.tenSanPham}" type="text" name="txtName" id="txtName" disabled>
                         <input type="hidden"th:value="${todoitem.Id}"  id="txtId">
                     </div>
                     <div class="infor">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="submit">
                     <button id="button_order" type="button"
-                        onclick="confirm_form()"><p>Thêm báo </p></button>
+                        onclick="confirm_form()"><p>Thêm sản phẩm </p></button>
                 </div>
             </div>
         </div>
@@ -85,13 +85,13 @@
             <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1"
                 id="MultiCarousel" data-interval="1000">
                 <div class="MultiCarousel-inner">
-                    <div class="item" th:each="tempBao : ${baos}">
+                    <div class="item" th:each="tempSanPham : ${SanPhams}">
                         <div class="item1">
-                            <i><img th:src="${tempBao.hinhAnh}" alt=""
+                            <i><img th:src="${tempSanPham.hinhAnh}" alt=""
                                     id="img1"></i>
                             <div class="order_product">
-                                <span th:text="${tempBao.getTenBao()}">Lorem ipsum dolor sit a</span>
-                                <button  >đặt báo</button>
+                                <span th:text="${tempSanPham.getTenSanPham()}">Lorem ipsum dolor sit a</span>
+                                <button  >đặt sản phẩm</button>
                             </div>
                         </div>
 
@@ -131,27 +131,27 @@
      		   today= yyyy+'-'+mm+'-'+dd;
      		   return today;
      		}
-            var datbao = {
+            var datSanPham = {
             	    "id": $('#gioHangId').val(),
             	    "khachHangId": $('#usersId').val(),
             	    "chiTietGioHang": [
             	        {
             	            "gioHangId": $('#gioHangId').val(),
-            	            "baoId": $('#txtId').val(),
-            	            "ngayDatBao": $('#txtstartorderdate').val(),
-            	            "ngaytKetThucDatBao": $('#txtendorderdate').val(),
+            	            "sanPhamId": Number($('#txtId').val()),
+            	            "ngayDatSanPham": $('#txtstartorderdate').val(),
+            	            "ngaytKetThucDatSanPham": $('#txtendorderdate').val(),
             	            "soLuong": $('#txtSoLuong').val(),
             	            "soKy": getsoki(),
             	            "donGia": $('#txtPrice').val(),
             	        }
            	        ]
             };
-
+			console.log(JSON.stringify(datSanPham));
         	$.ajax({
         		  type: "POST",
         		  url: '../giohang2',
         		  contentType: 'application/json; charset=utf-8',
-        		  data: JSON.stringify(datbao),
+        		  data: JSON.stringify(datSanPham),
         		  success: function( data ) {
               	    alert( "báo đã được thêm vào giỏ hàng thành công " + data );
             	  },

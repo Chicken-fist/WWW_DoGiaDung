@@ -25,12 +25,12 @@ public class ChiTietDonHangConvert {
 	public ChiTietDonHang chuyenChiTietDonHangEntity(ChiTietDonHangDTO chiTietDonHangDTO, int maDonHang) {
 		ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
 
-		SanPhamDto baoDto = sanPhamService.laySanPhamTheoID(chiTietDonHangDTO.getMabao());
-		chiTietDonHang.setSanPham(sanPhamConvert.chuyenSanPhamEntity(baoDto));
+		SanPhamDto SanPhamDto = sanPhamService.laySanPhamTheoID(chiTietDonHangDTO.getMaSanPham());
+		chiTietDonHang.setSanPham(sanPhamConvert.chuyenSanPhamEntity(SanPhamDto));
 		DonHangDTO donHangDTO = donHangService.layDonHangTheoId(maDonHang);
 		chiTietDonHang.setDonHang(donHangConvert.chuyendonHangEntity(donHangDTO));
 		chiTietDonHang.setDonHang(chiTietDonHang.getDonHang());
-		chiTietDonHang.setNgayDatHang(chiTietDonHangDTO.getNgayDatBao());
+		chiTietDonHang.setNgayDatHang(chiTietDonHangDTO.getNgayDatSanPham());
 		chiTietDonHang.setSoLuong(chiTietDonHangDTO.getSoLuong());
 		return chiTietDonHang;
 	}
@@ -39,10 +39,10 @@ public class ChiTietDonHangConvert {
 		ChiTietDonHangDTO chiTietDonHangDTO = new ChiTietDonHangDTO();
 
 		chiTietDonHangDTO.setMadonHang(chiTietDonHang.getDonHang().getid());
-		chiTietDonHangDTO.setMabao(chiTietDonHang.getSanPham().getId());
-		chiTietDonHangDTO.setTenBao(chiTietDonHang.getSanPham().getTenSanPham());
+		chiTietDonHangDTO.setMaSanPham(chiTietDonHang.getSanPham().getId());
+		chiTietDonHangDTO.setTenSanPham(chiTietDonHang.getSanPham().getTenSanPham());
 		chiTietDonHangDTO.setDonGia(chiTietDonHang.getSanPham().getDonGia());
-		chiTietDonHangDTO.setNgayDatBao(chiTietDonHang.getNgayDatHang());
+		chiTietDonHangDTO.setNgayDatSanPham(chiTietDonHang.getNgayDatHang());
 
 		chiTietDonHangDTO.setSoLuong(chiTietDonHang.getSoLuong());
 		chiTietDonHangDTO.setThanhTien(

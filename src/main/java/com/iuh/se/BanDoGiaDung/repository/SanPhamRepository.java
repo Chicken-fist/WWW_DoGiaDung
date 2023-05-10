@@ -13,7 +13,7 @@ import com.iuh.se.BanDoGiaDung.entity.SanPham;
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham, Integer> {
 	
-	@Query(value = "select * from bao s where s.ten_bao like %:ten% ", nativeQuery = true)
+	@Query(value = "select * from san_pham s where s.ten_san_pham like %:ten% ", nativeQuery = true)
 	List<SanPham> findAllByTenSanPham(@Param("ten") String tenSanPham);
 	
 
