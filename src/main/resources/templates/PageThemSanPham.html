@@ -25,10 +25,9 @@
 				<li><p>Xin chào đến với trang đặt báo giấy IUH</p></li>
 			</ul>
 			<span>
-				<ul>
-					<li><a href="#"><i><img src="../img/icon/bx_user.svg"
-								alt=""></i>Đăng xuất</a></li>
-				</ul>
+				<form th:action="@{/logout}" method="post">
+						<input type="submit" value="Logout" />
+					</form>
 			</span>
 		</nav>
 	</div>
@@ -55,18 +54,18 @@
                     <div class="infor">
                     	<input th:field="*{id}" type="hidden" name="txtid" id="txtid">
 
-                        <label for="txtName" style="padding-right: 30px;">Tên báo :</label>
+                        <label for="txtName" style="padding-right: 30px;">Tên Sản Phẩm :</label>
                         <input th:field="*{tenSanPham}" type="text" name="txtName" id="txtName"pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹế 0123456789 '\\s]+$"  title="Tên báo không có kí tự đặt biệt" >
                     </div>
                     <div class="infor" >
-                    <label for="txtstartday" style="padding-right: 25px;">Hình Ảnh:</label>
+                    <label for="txtstartday" style="padding-right: 65px;">Hình Ảnh:</label>
 					<input type="text" id="txtstartday1" th:field="*{hinhAnh}"><br><br>
 
-                    <label for="txtendday" style="padding-right: 34px;">Đơn Giá:</label>
+                    <label for="txtendday" style="padding-right: 73px;">Đơn Giá:</label>
 					<input type="text" id="txtendday1" th:field="*{donGia}"pattern="[-+]?[0-9]*\.?[0-9]"  title="Đơn giá phải là kí tử số" >		
                 </div>
                 <div class="infor">
-                    <label for="txtdescrip" style="padding-right: 47px;">Mô Tả:</label>
+                    <label for="txtdescrip" style="padding-right: 83px;">Mô Tả:</label>
                     <input th:field="*{moTa}" type="text" name="txtdescrip" id="txtdescrip" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹế 0123456789 , '\\s]+$"  title="Mô tả báo không có kí tự đặt biệt">
                 </div>
   

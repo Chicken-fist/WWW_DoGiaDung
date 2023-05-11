@@ -8,64 +8,88 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class Users {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private int id;
 
-  @Column(name = "username", columnDefinition = "nvarchar(100)")
-  private String username;
+	@Column(name = "username", columnDefinition = "nvarchar(100)")
+	private String username;
 
-  @Column(name = "password")
-  private String password;
+	@Column(name = "password")
+	private String password;
 
-  @OneToOne(mappedBy = "users")
-  private NhanVien nhanVien;
+	@OneToOne(mappedBy = "users")
+	private NhanVien nhanVien;
 
-  @OneToOne(mappedBy = "users")
-  private KhachHang khachHang;
+	@OneToOne(mappedBy = "users")
+	private KhachHang khachHang;
 
-  public int getId() {
-    return id;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public void setId(int id) {
-    this.id = id;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public NhanVien getNhanVien() {
-    return nhanVien;
-  }
+	public NhanVien getNhanVien() {
+		return nhanVien;
+	}
 
-  public void setNhanVien(NhanVien nhanVien) {
-    this.nhanVien = nhanVien;
-  }
+	public void setNhanVien(NhanVien nhanVien) {
+		this.nhanVien = nhanVien;
+	}
 
-  public KhachHang getKhachHang() {
-    return khachHang;
-  }
+	public KhachHang getKhachHang() {
+		return khachHang;
+	}
 
-  public void setKhachHang(KhachHang khachHang) {
-    this.khachHang = khachHang;
-  }
+	public void setKhachHang(KhachHang khachHang) {
+		this.khachHang = khachHang;
+	}
 
-  public String getUsername() {
-    return username;
-  }
+	public String getUsername() {
+		return username;
+	}
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-  public String getPassword() {
-    return password;
-  }
+	public String getPassword() {
+		return password;
+	}
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Users(String username, String password, KhachHang khachHang) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.khachHang = khachHang;
+	}
+
+	public Users(String username, String password, NhanVien nhanVien) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.nhanVien = nhanVien;
+	}
+
 }

@@ -17,7 +17,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@AllArgsConstructor
+@Getter
+@Setter
 @Data
 @Entity
 @Table(name = "don_hang")
@@ -27,8 +34,8 @@ public class DonHang {
 	@Column(name = "id", updatable = false, nullable = false)
 	private int id;
 
-	@ManyToOne(cascade = {CascadeType.MERGE})
-	@JoinColumn(name = "khachHangId")
+	@ManyToOne
+	@JoinColumn(name = "khach_hang_id")
 	private KhachHang khachHang;
 
 	@ManyToOne(cascade = {CascadeType.MERGE})

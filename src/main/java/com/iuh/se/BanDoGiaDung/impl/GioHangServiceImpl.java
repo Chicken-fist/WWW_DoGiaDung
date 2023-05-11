@@ -22,6 +22,7 @@ import com.iuh.se.BanDoGiaDung.entity.GioHang;
 import com.iuh.se.BanDoGiaDung.entity.SanPham;
 import com.iuh.se.BanDoGiaDung.repository.ChiTietGioHangRepository;
 import com.iuh.se.BanDoGiaDung.repository.GioHangRepository;
+import com.iuh.se.BanDoGiaDung.repository.KhachHangRepository;
 import com.iuh.se.BanDoGiaDung.repository.SanPhamRepository;
 import com.iuh.se.BanDoGiaDung.service.ChiTietGioHangService;
 import com.iuh.se.BanDoGiaDung.service.GioHangService;
@@ -41,6 +42,9 @@ public class GioHangServiceImpl implements GioHangService {
 	
 	@Autowired
 	private SanPhamRepository SanPhamRepository;
+	
+	@Autowired
+	private KhachHangRepository khachHangRepository;
 	
 	@Autowired
 	private ChiTietGioHangRepository chiTietGioHangRepository;
@@ -86,6 +90,8 @@ public class GioHangServiceImpl implements GioHangService {
 			}
 			chiTietGioHangRepository.saveAll(chiTietGioHangs);
 			gioHangRepository.save(gioHang);
+		} else {
+			gioHangRepository.save(new GioHang(gioHangDto.getNgayTaoGioHang(), null, khachHangRepository.findById(gioHangDto.getKhachHangId()).get()));
 		}
 
 	}

@@ -13,98 +13,113 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "khach_hang")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class KhachHang {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", updatable = false, nullable = false)
-  private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private int id;
 
-  @Column(name = "ho_ten", columnDefinition = "nvarchar(100)")
-  private String hoTen;
+	@Column(name = "ho_ten", columnDefinition = "nvarchar(100)")
+	private String hoTen;
 
-  @Column(name = "email", columnDefinition = "nvarchar(100)")
-  private String email;
+	@Column(name = "email", columnDefinition = "nvarchar(100)")
+	private String email;
 
-  @Column(name = "sdt")
-  private String SDT;
-  // mapping
+	@Column(name = "sdt")
+	private String SDT;
+	// mapping
 
-  //	@OneToMany(mappedBy = "khachHang",cascade = {CascadeType.MERGE})
-  //	private Set<DonHang> dsHoaDon;
+	// @OneToMany(mappedBy = "khachHang",cascade = {CascadeType.MERGE})
+	// private Set<DonHang> dsHoaDon;
 
-  @OneToOne(cascade = {CascadeType.MERGE})
-  @PrimaryKeyJoinColumn
-  private GioHang gioHang;
+	@OneToOne(cascade = { CascadeType.MERGE })
+	@PrimaryKeyJoinColumn
+	private GioHang gioHang;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "users_id", referencedColumnName = "id")
-  private Users users;
-  
-  public KhachHang() {}
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "users_id", referencedColumnName = "id")
+	private Users users;
 
-  public KhachHang(int id) {
-    this.id = id;
-  }
+	public KhachHang() {
+	}
 
-  public KhachHang(int id, String hoTen, String sDT, GioHang gioHang, Users users) {
-    this.id = id;
-    this.hoTen = hoTen;
-    this.SDT = sDT;
-    this.gioHang = gioHang;
-    this.users = users;
-  }
+	public KhachHang(int id) {
+		this.id = id;
+	}
 
-  public int getid() {
-    return id;
-  }
+	public KhachHang(int id, String hoTen, String sDT, GioHang gioHang, Users users) {
+		this.id = id;
+		this.hoTen = hoTen;
+		this.SDT = sDT;
+		this.gioHang = gioHang;
+		this.users = users;
+	}
 
-  public void setid(int id) {
-    this.id = id;
-  }
+	public int getid() {
+		return id;
+	}
 
-  public String getHoTen() {
-    return hoTen;
-  }
+	public void setid(int id) {
+		this.id = id;
+	}
 
-  public void setHoTen(String hoTen) {
-    this.hoTen = hoTen;
-  }
+	public String getHoTen() {
+		return hoTen;
+	}
 
-  public Users getUsers() {
-    return users;
-  }
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
+	}
 
-  public void setUsers(Users users) {
-    this.users = users;
-  }
+	public Users getUsers() {
+		return users;
+	}
 
-  public String getSDT() {
-    return SDT;
-  }
+	public void setUsers(Users users) {
+		this.users = users;
+	}
 
-  public void setSDT(String sDT) {
-    SDT = sDT;
-  }
+	public String getSDT() {
+		return SDT;
+	}
 
-public String getEmail() {
-	return email;
-}
+	public void setSDT(String sDT) {
+		SDT = sDT;
+	}
 
-public void setEmail(String email) {
-	this.email = email;
-}
+	public String getEmail() {
+		return email;
+	}
 
-public KhachHang(int id, String hoTen, String email, String sDT, GioHang gioHang, Users users) {
-	super();
-	this.id = id;
-	this.hoTen = hoTen;
-	this.email = email;
-	SDT = sDT;
-	this.gioHang = gioHang;
-	this.users = users;
-}
-  
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public KhachHang(String hoTen, String email, String sDT, Users users) {
+		super();
+		this.hoTen = hoTen;
+		this.email = email;
+		SDT = sDT;
+		this.users = users;
+	}
+
+	@Override
+	public String toString() {
+		return "KhachHang [id=" + id + ", hoTen=" + hoTen + ", email=" + email + ", SDT=" + SDT + ", gioHang=" + gioHang
+				+ ", users=" + users + "]";
+	}
+	
+	
+
 }

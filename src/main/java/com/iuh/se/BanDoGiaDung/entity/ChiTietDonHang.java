@@ -12,8 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
+@Getter
+@Setter
 @Entity
 @Table(name = "chi_tiet_don_hang")
 public class ChiTietDonHang {

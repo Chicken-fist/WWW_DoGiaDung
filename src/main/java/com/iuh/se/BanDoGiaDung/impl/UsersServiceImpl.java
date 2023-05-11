@@ -21,5 +21,10 @@ public class UsersServiceImpl implements UsersService {
 	public Users findById(int id ) {
 		return usersRepository.findById(id);
 	}
+	@Override
+	public Users them(Users user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

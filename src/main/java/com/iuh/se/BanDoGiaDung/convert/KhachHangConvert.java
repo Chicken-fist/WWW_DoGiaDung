@@ -20,7 +20,7 @@ public class KhachHangConvert {
 		 khachHang.setHoTen(khachHangDto.getTenKhachHang());
 		 khachHang.setEmail(khachHangDto.getEmail());
 		 khachHang.setSDT(khachHangDto.getSDT());
-		 khachHang.setUsers(usersService.findById(khachHangDto.getMaUser()));
+		 khachHang.setUsers(null);
 //		 khachHang.setMatKhau(khachHangDto.getMatKhau());
 
 		 return khachHang;
@@ -37,7 +37,7 @@ public class KhachHangConvert {
 		 khachHangDto.setTenKhachHang(khachHang.getHoTen());
 		 khachHangDto.setEmail(khachHang.getEmail());
 		 khachHangDto.setSDT(khachHang.getSDT());
-		 khachHangDto.setMaUser(khachHang.getUsers().getId());
+//		 khachHangDto.setMaUser(n);
 //		 khachHangDto.setMatKhau(khachHang.getMatKhau());
 		 
 		 return khachHangDto;

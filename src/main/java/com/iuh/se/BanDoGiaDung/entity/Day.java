@@ -1,5 +1,12 @@
 package com.iuh.se.BanDoGiaDung.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Day {
 	private int ngay;
 	private int thang;

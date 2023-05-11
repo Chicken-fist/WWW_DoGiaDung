@@ -10,4 +10,5 @@ public interface UsersService {
 
 	Users findById(int id);
 
+	Users them(Users user);
 }

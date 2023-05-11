@@ -52,10 +52,10 @@ public class DonHangConvert {
 //		donHang.setChiTietDonHang(chiTietDonHangConvert.chuyenChiTietDonHangEntity(donHangDTO.getChiTietDonHang()));
 //		donHang.setChiTietDonHang(null);
 		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>();
-//		donHangDTO.getChiTietDonHang().forEach(a->{
-//			chiTietDonHangs.add( chiTietDonHangConvert.chuyenChiTietDonHangEntity(a));
-//			
-//		});
+		donHangDTO.getChiTietDonHang().forEach(a->{
+			chiTietDonHangs.add( chiTietDonHangConvert.chuyenChiTietDonHangEntity(a, donHang.getid()));
+			
+		});
 		donHang.setChiTietDonHang(chiTietDonHangs);
 
 		return donHang;
@@ -69,16 +69,29 @@ public class DonHangConvert {
 		}
 
 		);
-
-		DonHangDTO donHangDTO = DonHangDTO.builder().maKhachHang(donHang.getKhachHang().getid())
-				.tenKhachHang(donHang.getKhachHang().getHoTen()).SDT(donHang.getKhachHang().getSDT())
-				.maKhuyenMai(donHang.getKhuyenMai().getid()).tenKhuyenMai(donHang.getKhuyenMai().getTenKhuyenMai())
-				.ngayTaoDonHang(donHang.getNgayTaoDonHang()).trangThaiDonHang(donHang.getTrangThaiDonHang())
-				.diaChiNhanHang(donHang.getDiaChiNhanHang()).tongThanhTien(tongThanhTien)
-				.tongTienDonHang(tongThanhTien - donHang.getKhuyenMai().getGiaTriGiam())
-				.hinhThucThanhToan(donHang.getHinhThucThanhToan()).giaTriGiam(donHang.getKhuyenMai().getGiaTriGiam())
-				.build();
-
+		DonHangDTO donHangDTO = null;
+		if (donHang.getKhuyenMai() == null) {
+			donHangDTO = DonHangDTO.builder().maKhachHang(donHang.getKhachHang().getid())
+					.tenKhachHang(donHang.getKhachHang().getHoTen()).SDT(donHang.getKhachHang().getSDT())
+					.maKhuyenMai(5).tenKhuyenMai("Khong Co")
+					.ngayTaoDonHang(donHang.getNgayTaoDonHang()).trangThaiDonHang(donHang.getTrangThaiDonHang())
+					.diaChiNhanHang(donHang.getDiaChiNhanHang()).tongThanhTien(tongThanhTien)
+					.tongTienDonHang(tongThanhTien - 0)
+					.hinhThucThanhToan(donHang.getHinhThucThanhToan()).giaTriGiam(0)
+					.build();
+		} else {
+			donHangDTO = DonHangDTO.builder().maKhachHang(donHang.getKhachHang().getid())
+					.tenKhachHang(donHang.getKhachHang().getHoTen()).SDT(donHang.getKhachHang().getSDT())
+					.maKhuyenMai(donHang.getKhuyenMai().getid() 
+							).tenKhuyenMai(donHang.getKhuyenMai().getTenKhuyenMai() == null ? "Khong Co" : 
+						donHang.getKhuyenMai().getTenKhuyenMai())
+					.ngayTaoDonHang(donHang.getNgayTaoDonHang()).trangThaiDonHang(donHang.getTrangThaiDonHang())
+					.diaChiNhanHang(donHang.getDiaChiNhanHang()).tongThanhTien(tongThanhTien)
+					.tongTienDonHang(tongThanhTien - donHang.getKhuyenMai().getGiaTriGiam())
+					.hinhThucThanhToan(donHang.getHinhThucThanhToan()).giaTriGiam(donHang.getKhuyenMai().getGiaTriGiam())
+					.build();
+		}
+		
 		if (donHang.getid() != 0) {
 			donHangDTO.setId(donHang.getid());
 		}

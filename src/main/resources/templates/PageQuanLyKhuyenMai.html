@@ -25,10 +25,9 @@
 				<li><p>Xin chào đến với trang đặt đồ gia dụng IUH</p></li>
 			</ul>
 			<span>
-				<ul>
-					<li><a href="#"><i><img src="../img/icon/bx_user.svg"
-								alt=""></i>Đăng xuất</a></li>
-				</ul>
+				<form th:action="@{/logout}" method="post">
+						<input type="submit" value="Logout" />
+					</form>
 			</span>
 		</nav>
 	</div>

@@ -59,9 +59,7 @@
 									<th>#</th>
 									<th>Chọn</th>
 									<th>Tên Sản Phẩm</th>
-									<th>Ngày bắt đầu</th>
-									<th>Ngày kết thúc</th>
-									<th>Số kì</th>
+									<th>Ngày đặt hàng</th>
 									<th>Số lượng</th>
 									<th>Đơn giá</th>
 									<th>Thành tiền</th>
@@ -86,12 +84,6 @@
 										th:value="${#dates.format(todoitem.ngayDatSanPham, 'yyyy-MM-dd')}"><input
 										type="hidden" th:value=${todoitem.SanPhamId} id="txtId"></td>
 
-									<td><input type="text" name="ngayKetThucDatSanPham"
-										placeholder="Date From"
-										th:value="${#dates.format(todoitem.ngaytKetThucDatSanPham, 'yyyy-MM-dd')}">
-									</td>
-
-									<td th:text="${todoitem.soKy}" name="soKy"></td>
 
 									<td><input type="number"
 										style="width: 50px; text-align: center" value="1"
@@ -121,7 +113,7 @@
 							<td>
 								<!-- <a href="" th:onclick="mua_SanPham()"style="border: #333 solid;">Mua Báo</a> -->
 								<Button class="btn-ul-li-dathang" th:onclick="mua_SanPham()">Mua
-									báo</Button>
+									Hàng</Button>
 							</td>
 						</tr>
 					</li>
@@ -181,7 +173,6 @@
 	                "ngayDatSanPham": parent.find('input[name="ngayDatSanPham"]').val(),
 	                "ngatKetThucDatSanPham": parent.find('input[name="ngayKetThucDatSanPham"]').val(),
 	                "soLuong": parent.find('input[name="soLuong"]').val(),
-	                "soKy": parent.find('td[name="soKy"]').text(),
 	                "donGia": parent.find('td[name="donGia"]').text(),
 	                "thanhTien": parent.find('td[name="thanhTien"]').text(),
 	   	            }

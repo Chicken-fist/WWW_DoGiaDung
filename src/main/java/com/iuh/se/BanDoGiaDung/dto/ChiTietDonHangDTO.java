@@ -17,10 +17,8 @@ public class ChiTietDonHangDTO {
 	private int maSanPham;
 	private String tenSanPham;
 	private Date ngayDatSanPham;
-	private Date ngatKetThucDatSanPham;
 	private double donGia;
 	private int soLuong;
-	private int soKy;
 	private double thanhTien;
 
 	

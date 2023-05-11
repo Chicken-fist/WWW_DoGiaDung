@@ -34,6 +34,7 @@ public class SanPhamController {
 	
 	@Autowired
 	private UsersService usersService;
+	
 	@Autowired
 	private GioHangRepository gioHangRepository;
 	private String tenSanPham;
@@ -41,9 +42,8 @@ public class SanPhamController {
 	@GetMapping(value = "/SanPham", consumes = MediaType.ALL_VALUE)
 	public String danhSachSanPham(Model theModel, Principal principal) {
 		List<SanPhamDto> sanPhams = sanPhamService.layDSSanPham();
-		System.out.println(sanPhams);
 		Users users = usersService.getByUsername(principal.getName());
-		GioHang gioHang = gioHangRepository.findByUsersId(users.getId());
+		GioHang gioHang = gioHangRepository.TimByUsersId(users.getId());
 		theModel.addAttribute("usersId", users.getId());
 		if (users.getKhachHang() != null) {
 			theModel.addAttribute("gioHangId", gioHang.getid());
@@ -63,7 +63,7 @@ public class SanPhamController {
 	@RequestMapping(value = "/chitietdatSanPham/{maSanPham}", method = RequestMethod.GET)
 	public String laySanPhamTheoID(@PathVariable int maSanPham, Principal principal, Model theModel) {
 		Users users = usersService.getByUsername(principal.getName());
-		GioHang gioHang = gioHangRepository.findByUsersId(users.getId());
+		GioHang gioHang = gioHangRepository.TimByUsersId(users.getId());
 		SanPhamDto SanPhamDto = sanPhamService.laySanPhamTheoID(maSanPham);
 		List<SanPhamDto> SanPhamDtos = sanPhamService.layDSSanPham();
 		theModel.addAttribute("SanPham1", SanPhamDto);

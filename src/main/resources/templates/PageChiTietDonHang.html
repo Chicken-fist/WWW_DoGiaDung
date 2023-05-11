@@ -181,7 +181,7 @@ nav span ul li {
     </div>
 	<div class="nav-header">
 		<ul class="nav-header-ul">
-			<li id="nav-header-li"><a id="123" th:href="@{/admin/bao/show}">Sản
+			<li id="nav-header-li"><a id="123" th:href="@{/admin/SanPham/show}">Sản
 					phẩm</a></li>
 			<li id="nav-header-li"><a id="123"
 				th:href="@{/admin/donHang/doanhThu/show}">Doanh thu</a></li>
@@ -203,9 +203,7 @@ nav span ul li {
             <th scope="col">Mã Đơn Hàng</th>
             <th scope="col">Mã Báo </th>
             <th scope="col">Ngày đặt báo</th>
-            <th scope="col">Ngày kết thúc đặt báo </th>
             <th scope="col">Số lượng</th>
-            <th scope="col">Số kì</th>
             <th scope="col">Đơn giá</th>
             <th scope="col">Thành tiền </th>
           </tr>
@@ -214,11 +212,9 @@ nav span ul li {
           <tr th:each="chitiet : ${chitietdonhang}">
             <td scope="row">1</th>
             <td th:text=${chitiet.madonHang}></td>
-			<td th:text=${chitiet.mabao}></td>
-			<td th:text="${#dates.format(chitiet.ngayDatBao, 'dd-MM-yyyy')}"></td>
-			<td th:text="${#dates.format(chitiet.ngatKetThucDatBao, 'dd-MM-yyyy')}"></td>
+			<td th:text=${chitiet.maSanPham}></td>
+			<td th:text="${#dates.format(chitiet.ngayDatSanPham, 'dd-MM-yyyy')}"></td>
 			<td th:text=${chitiet.soLuong}></td>
-			<td th:text=${chitiet.soKy}></td>
 			<td th:text="${#numbers.formatDecimal(chitiet.donGia, 0, 'COMMA', 0, 'POINT')}+ ' đ'"></td>
             <td th:text="${#numbers.formatDecimal(chitiet.thanhTien, 0, 'COMMA', 0, 'POINT')}+ ' đ'">
       

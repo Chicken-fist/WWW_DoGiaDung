@@ -1,18 +1,26 @@
 package com.iuh.se.BanDoGiaDung.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.iuh.se.BanDoGiaDung.convert.KhachHangConvert;
+import com.iuh.se.BanDoGiaDung.dto.GioHangDto;
 import com.iuh.se.BanDoGiaDung.dto.KhachHangDto;
 import com.iuh.se.BanDoGiaDung.entity.KhachHang;
+import com.iuh.se.BanDoGiaDung.entity.Users;
 import com.iuh.se.BanDoGiaDung.repository.KhachHangRepository;
+import com.iuh.se.BanDoGiaDung.repository.UsersRepository;
+import com.iuh.se.BanDoGiaDung.service.GioHangService;
 import com.iuh.se.BanDoGiaDung.service.KhachHangService;
+import com.iuh.se.BanDoGiaDung.service.UsersService;
 
 @Service
 public class KhachHangServiceImpl implements KhachHangService {
@@ -22,6 +30,15 @@ public class KhachHangServiceImpl implements KhachHangService {
 	
 	@Autowired
 	private KhachHangConvert khachHangConvert;
+	
+	@Autowired
+	private UsersRepository usersRepository;
+
+	@Autowired
+	private GioHangService gioHangService;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@Autowired
 	public KhachHangServiceImpl(KhachHangRepository khachHangRepository) {
@@ -46,9 +63,17 @@ public class KhachHangServiceImpl implements KhachHangService {
 	}
 	
 	@Override
-	public KhachHangDto themKhachHang(KhachHangDto khachHangDto) {
+	public KhachHangDto themKhachHang(KhachHangDto khachHangDto) throws Exception {
+		
 		KhachHang khachHang = khachHangConvert.chuyenKhachHangEntity(khachHangDto);
 		khachHang = khachHangRepository.save(khachHang);
+		if (usersRepository.findByUsername(khachHang.getHoTen()).orElse(null) != null) {
+			throw new Exception("User này đã tồn tại");
+		}
+		Users user = usersRepository.save(new Users(khachHang.getHoTen(),encoder.encode(khachHangDto.getMatKhau()) , khachHang));
+		gioHangService.luuGioHang(new GioHangDto(new Date(), khachHang.getid(), null));
+		khachHang.setUsers(user);
+		khachHangRepository.save(khachHang);
 		return khachHangConvert.chuyenKhachHangDto(khachHang);
 	}
 	

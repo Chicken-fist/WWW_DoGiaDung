@@ -42,7 +42,7 @@
 					
 					<input class="input100" type="text" name="hoTen" placeholder="Họ tên" th:value="'Tên khách hàng:    '+ ${todoitem1.tenKhachHang}" disabled>
 					<input class="input100" type="text" name="SDT" placeholder="SĐT"  th:value="'Số điện thoại:       '+${todoitem1.SDT}" disabled>
-					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ" th:value="'Địa chỉ nhận báo:  '+${todoitem1.diaChiNhanHang}" disabled>
+					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ" th:value="'Địa chỉ nhận hàng:  '+${todoitem1.diaChiNhanHang}" disabled>
 					<input class="input100" type="text" name="diaChi" placeholder="Địa chỉ" th:value="'Hình thức thanh toán:  '+${todoitem1.hinhThucThanhToan}" disabled>
 					<input class="input100" type="text" name="trangThai" placeholder="Trạng thái đơn hàng" th:value="'Trạng thái đơn hàng :  '+${todoitem1.trangThaiDonHang}" disabled>
 				</div>
@@ -55,9 +55,7 @@
 						  <thead>
 						    <tr>
 						      <th>Tên Sản Phẩm</th>
-						      <th>Ngày bắt đầu</th>
-						      <th>Ngày kết thúc</th>
-						      <th>Số kì</th>
+						      <th>Ngày Mua</th>
 							  <th>Số lượng</th>
 							  <th>Đơn giá</th>
 							  <th>Thành tiền</th>
@@ -70,11 +68,6 @@
 										placeholder="Date From"
 										th:value="${#dates.format(todoitem.ngayDatSanPham, 'dd-MM-YYYY')}"
 										style="width: 100px" disabled ></td>
-						      <td><input type="text" name="ngayKetThucDatSanPham"
-										placeholder="Date From"
-										th:value="${#dates.format(todoitem.ngatKetThucDatSanPham, 'dd-MM-YYYY')}"
-										style="width: 100px" disabled></td>
-							  <td th:text="${todoitem.soKy}" name="soKy"></td>
 							  <td  th:text="${todoitem.soLuong}"></td>
 							  <td  th:text="${todoitem.donGia}"></td>
 						     <td th:text="${#numbers.formatDecimal(todoitem.thanhTien, 0, 'COMMA', 0, 'POINT')}+ ' đ'">

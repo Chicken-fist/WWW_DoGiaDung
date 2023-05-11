@@ -18,6 +18,7 @@ import com.iuh.se.BanDoGiaDung.convert.KhachHangConvert;
 import com.iuh.se.BanDoGiaDung.convert.KhuyenMaiConvert;
 import com.iuh.se.BanDoGiaDung.dto.ChiTietDonHangDTO;
 import com.iuh.se.BanDoGiaDung.dto.DonHangDTO;
+import com.iuh.se.BanDoGiaDung.dto.KhuyenMaiDto;
 import com.iuh.se.BanDoGiaDung.entity.ChiTietDonHang;
 import com.iuh.se.BanDoGiaDung.entity.ChiTietDonHangPk;
 import com.iuh.se.BanDoGiaDung.entity.ChiTietGioHangPk;
@@ -126,19 +127,22 @@ public class DonHangServiceImpl implements DonHangService {
 		DonHang donHang = new DonHang();
 		double total = 0.0;
 		for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHang()) {
-			total += chiTietDonHangDTO.getSoKy() * chiTietDonHangDTO.getDonGia() * chiTietDonHangDTO.getSoLuong();
+			total +=  chiTietDonHangDTO.getDonGia() * chiTietDonHangDTO.getSoLuong();
 		}
 		Optional<KhuyenMai> khuyenMai = khuyenMaiRepository.findById(donHangDTO.getMaKhuyenMai());
 		if (khuyenMai.isPresent()) {
 			total -= khuyenMai.get().getGiaTriGiam();
 		}
-		donHang.setKhachHang(new KhachHang(donHangDTO.getMaKhachHang()));
+		KhachHang kh = khachHangRepository.findByUsersId(donHangDTO.getMaKhachHang()).orElse(null);
+		System.out.println(kh + "    asdhqjwkge");
 		donHang.setKhuyenMai(new KhuyenMai(donHangDTO.getMaKhuyenMai()));
 		donHang.setNgayTaoDonHang(donHangDTO.getNgayTaoDonHang());
 		donHang.setTrangThaiDonHang(donHangDTO.getTrangThaiDonHang());
 		donHang.setDiaChiNhanHang(donHangDTO.getDiaChiNhanHang());
 		donHang.setTongTienDonHang(total);
 		donHang.setHinhThucThanhToan(donHangDTO.getHinhThucThanhToan());
+		donHangRepository.save(donHang);
+		donHang.setKhachHang(kh);
 		donHangRepository.save(donHang);
 		Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>();
 		for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHang()) {

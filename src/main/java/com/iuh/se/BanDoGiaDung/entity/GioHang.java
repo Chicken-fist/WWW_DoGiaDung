@@ -15,6 +15,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "gio_hang")
 public class GioHang {
@@ -34,10 +42,9 @@ public class GioHang {
 	@JoinColumn(name = "khachHangId")
 	private KhachHang khachHang;
 
-	public GioHang(int id, Date ngayTaoGioHang, Set<ChiTietGioHang> dsChiTietGioHang,
+	public GioHang(Date ngayTaoGioHang, Set<ChiTietGioHang> dsChiTietGioHang,
 			KhachHang khachHang) {
 		super();
-		this.id = id;
 		this.ngayTaoGioHang = ngayTaoGioHang;
 		this.dsChiTietGioHang = dsChiTietGioHang;
 		this.khachHang = khachHang;

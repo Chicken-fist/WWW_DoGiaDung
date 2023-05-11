@@ -73,6 +73,7 @@ public class DonHangController {
 //	}
 
 	@DeleteMapping("/donhang/{madonhang}")
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	public String xoaDonHang(@PathVariable int madonhang) {
 		return donHangService.xoaDonHang(madonhang);
 	}
@@ -115,6 +116,7 @@ public class DonHangController {
 	}
 
 	@PostMapping("/admin/donHang/update/{madonhang}")
+	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	public String suaDonHangTheoId(@Param("tinhtrang") String tinhtrang, @PathVariable int madonhang, Model model) {
 
 		DonHangDTO donHangDTO = donHangService.layDonHangTheoId(madonhang);

@@ -26,8 +26,9 @@
 			</ul>
 			<span>
 				<ul>
-					<li><a href="#"><i><img src="../img/icon/bx_user.svg"
-								alt=""></i>Đăng xuất</a></li>
+					<form th:action="@{/logout}" method="post">
+						<input type="submit" value="Logout" />
+					</form>
 				</ul>
 			</span>
 		</nav>

@@ -35,7 +35,7 @@ public class KhachHangController {
 	}
 	@PreAuthorize("hasAuthority('EMPLOYEE')")
 	@PostMapping(value = "/addKhachHang", consumes = MediaType.ALL_VALUE)
-	public String themKhachHang(@ModelAttribute("khachHang") KhachHangDto khachHangDto) {
+	public String themKhachHang(@ModelAttribute("khachHang") KhachHangDto khachHangDto) throws Exception {
 		 khachHangService.themKhachHang(khachHangDto);
 		 return "redirect:/admin/khachHang/show";
 	}
