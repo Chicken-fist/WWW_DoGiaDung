@@ -19,15 +19,16 @@
 	<div id="wapper">
 		<nav>
 			<ul class="menu">
-				<li><a th:href="@{/SanPham}"><i><img src="../img/logo.jpg"
+				<li><a th:href="@{/SanPham}"><i><img src="../img/logo.png"
 							alt=""></i></a></li>
-				<li><p id="menu-css">Xin chào đến với trang đặt báo giấy
+				<li><p id="menu-css">Xin chào đến với trang đặt đồ gia dụng
 						IUH</p></li>
 			</ul>
 			<span>
 				<ul>
 					<li><a sec:authorize="hasAuthority('CUSTOMER')"
-						class="menu-cart" th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
+						class="menu-cart"
+						th:href="@{/giohang/{gioHangId}(gioHangId=${gioHangId})}"><img
 							src="../img/icon/akar-icons_cart.svg">Giỏ hàng | </a></li>
 					<li>Hi <i sec:authentication="name"></i>!
 					</li>
